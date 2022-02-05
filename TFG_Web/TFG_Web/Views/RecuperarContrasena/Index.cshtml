@@ -1,0 +1,109 @@
+﻿@{
+    ViewData["Title"] = "Recuperar contraseña";
+}
+@model ViewModel
+
+<main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
+    <div class="container">
+        <div class="card login-card">
+            <div class="row no-gutters">
+                <div class="col-md-5">
+                    <img src="~/img/loginWallpaper.jpg" alt="login" class="login-card-img">
+                </div>
+                <div class="col-md-7">
+
+                    @if (Model.Usuarios != null)
+                    {
+                        @if (Model.NotificacionesControl)
+                        {
+                            @if (Model.Notificaciones)
+                            {
+                                <div class="alert alert-success" role="alert">
+                                    <p>@Model.NotificacionesMensaje</p>
+                                </div>
+                            }
+
+                            @if (Model.Notificaciones == false)
+                            {
+                                <div class="alert alert-danger" role="alert">
+                                    <p>@Model.NotificacionesMensaje</p>
+                                </div>
+                            }
+                        }
+                        <div class="card-body">
+                            <p class="login-card-description">
+                                Cambiar contraseña
+                            </p>
+                            <form id="LoginForm" class="text-left" asp-area="" asp-controller="RecuperarContrasena" asp-action="CambiarContrasena" method="post">
+                                <input type="text" class="form-control" name="token" hidden="hidden" value=@Model.Usuarios.P_Password />
+                                <div class="form-label-group">
+                                    <div class="form-group">
+                                        <input id="inputPasswordChanges" type="password" class="form-control" name="contrasena" placeholder="Contraseña nueva" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <input id="inputPasswordChanges2" type="password" class="form-control" placeholder="Confirmar contraseña" required />
+                                    </div>
+                                </div>
+                                <p id="changesPasswordError" style="color:red" hidden="hidden">Las dos contraseñas tienen que ser la misma</p>
+                                <button id="buttonRecuperar" class="btn btn-block login-btn mb-4" type="button">
+                                    <span id="spinnerRecuperar" style="display:inline-block" hidden="hidden" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    Cambiar contraseña
+                                </button>
+                                <input id="submitFormRecuperar" type="submit" class="fadeIn fourth btn btn-primary" hidden="hidden">
+                            </form>
+                            <p class="login-card-footer-text">
+                                <a class="text-reset" style="color:deepskyblue" asp-area="" asp-controller="LoginUsuario" asp-action="Index">
+                                    <i class="fas fa-arrow-left"></i>
+                                    Volver a iniciar sesión
+                                </a>
+                            </p>
+                        </div>
+                    }
+                    else
+                    {
+                        @if (Model.NotificacionesControl)
+                        {
+                            @if (Model.Notificaciones)
+                            {
+                                <div class="alert alert-success" role="alert">
+                                    <p>@Model.NotificacionesMensaje</p>
+                                </div>
+                            }
+
+                            @if (Model.Notificaciones == false)
+                            {
+                                <div class="alert alert-danger" role="alert">
+                                    <p>@Model.NotificacionesMensaje</p>
+                                </div>
+                            }
+                        }
+                        <div class="card-body">
+                            <p class="login-card-description">
+                                Recuperar contraseña
+                            </p>
+                            <form id="LoginForm" class="text-left" asp-area="" asp-controller="RecuperarContrasena" asp-action="EnviarCorreoRecuperacion" method="post">
+                                <div class="form-label-group">
+                                    <div class="form-group">
+                                        <input type="email" name="correo" class="form-control" placeholder="Correo electrónico" required pattern="[a-z0-9._%+-]+@("@")gmail\.com$" />
+                                    </div>
+                                </div>
+                                <button id="buttonRecuperar" class="btn btn-block login-btn mb-4" type="button">
+                                    <span id="spinnerRecuperar" style="display:inline-block" hidden="hidden" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    Recuperar
+                                </button>
+                                <input id="submitFormRecuperar" type="submit" class="fadeIn fourth btn btn-primary" hidden="hidden">
+                            </form>
+                            <p class="login-card-footer-text">
+                                Se enviará un correo electrónico para poder recuperar la contraseña
+                            </p>
+                            <a class="text-reset" style="color:deepskyblue" asp-area="" asp-controller="LoginUsuario" asp-action="Index">
+                                <i class="fas fa-arrow-left"></i>
+                                Volver a iniciar sesión
+                            </a>     
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

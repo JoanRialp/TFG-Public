@@ -1,0 +1,62 @@
+﻿@model ViewModel
+@{
+    ViewData["Title"] = "Pacientes";
+}
+
+<div class="d-flex justify-content-center flex-column">
+    <div class="jumbotron text-center">
+        <h1>Pacientes</h1>
+    </div>
+
+    @if (Model.NotificacionesControl)
+    {
+        @if (Model.Notificaciones)
+        {
+            <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading">@Model.NotificacionesPaciente</h4>
+                <p>@Model.NotificacionesMensaje</p>
+            </div>
+        }
+
+        @if (Model.Notificaciones == false)
+        {
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading">@Model.NotificacionesPaciente</h4>
+                <p>@Model.NotificacionesMensaje</p>
+            </div>
+        }
+    }
+
+    <div class="col-sm-12" style="margin-bottom:1%">
+        <a class="btn btn-success font-weight-bold float-right" asp-area="Clinics" asp-controller="NuevoUsuario" asp-action="Index">
+            Crear Paciente <span class="fa fa-plus"></span>
+        </a>
+    </div>
+
+    @*Bootstrap table*@
+    <div class="row">
+        <div class="table-responsive col-12 mx-auto" align="left">
+            <table id="table_PacientesInicio" class="table table-striped">
+                <thead>
+                    <tr class="text-left align-text-bottom" style="background-color:#87CEFA">
+                        <th style="vertical-align: middle" scope="col">Nombre </th>
+                        <th style="vertical-align: middle" scope="col">Apellidos</th>
+                        <th style="vertical-align: middle" scope="col">Fecha primera consulta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var pacientes in Model.ListPacientes)
+                    {
+                        <tr class="text-sm-left">
+                            <td style="cursor: pointer;"onclick="location.href = '@(Url.Action("Index", "PerfilPaciente", new {  id = pacientes.Id }))'"> @pacientes.P_Nombre </td>
+                            <td style="cursor: pointer;"onclick="location.href = '@(Url.Action("Index", "PerfilPaciente", new {  id = pacientes.Id }))'"> @pacientes.P_Apellidos</td>
+                            <td style="cursor: pointer;"onclick="location.href = '@(Url.Action("Index", "PerfilPaciente", new {  id = pacientes.Id }))'"> @pacientes.P_PrimeraConsulta.ToString("dd/MM/yyyy")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <hr />
+</div>

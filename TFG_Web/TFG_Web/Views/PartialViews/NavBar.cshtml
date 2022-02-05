@@ -1,0 +1,42 @@
+﻿@using Microsoft.AspNetCore.Http
+<!-- NavBar  -->
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid navbar">
+        <button type="button" id="sidebarCollapse" class="btn">
+            <i class="fas fa-align-left"></i>
+        </button>
+        <!-- Search  -->
+        <div id="navBarContainer" class="input-group col-6 mx-auto">
+            <input id="search_Pacientes" class="form-control py-2 border-right-0 border" type="search" placeholder="Buscar pacientes..." onkeyup="search_Pacientes()">
+            <span class="input-group-append">
+                <button id="desplegable_Pacientes" type="button" class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split border border-left-0 border-right-0 rounded-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                </button>
+                <button id="search-button" type="button" class="btn btn-primary">
+                    <i class="fa fa-search"></i>
+                </button>
+                <span id="listado_Pacientes" class="dropdown-menu dropdown-menu-right">
+                    @foreach (var paciente in Model.ListPacientes)
+                    {
+                        <a id="paciente" onclick="changes_Value_Search('@paciente.P_Nombre')" style="display:block" class="dropdown-item"
+                           asp-area="Clinics" asp-controller="PerfilPaciente" asp-action="Index" asp-route-id="@paciente.Id"> @paciente.P_Nombre @paciente.P_Apellidos</a>
+                    }
+                </span>
+            </span>
+        </div>
+
+        <div style="float:right">
+            <span>
+                @{
+                    var x = Context.Session.GetString("usrUsername");
+                    @x
+                    <i class="far fa-user fa-2x"></i>
+                }
+            </span>
+            @*
+                <i class="far fa-bell fa-2x"></i>
+                <i class="far fa-envelope-open fa-2x"></i>
+                <i class="fas fa-cog fa-2x"></i>
+            *@
+        </div>
+    </div>
+</nav>

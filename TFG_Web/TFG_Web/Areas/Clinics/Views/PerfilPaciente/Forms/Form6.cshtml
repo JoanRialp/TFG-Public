@@ -1,0 +1,275 @@
+﻿<div class="tab-pane fade" id="form6" role="tabpanel" aria-labelledby="navPagina6FormUsuario">
+    <div class="tab-pane" id="home">
+        <form asp-area="Clinics" asp-controller="PerfilPaciente" asp-action="form6PerfilPacientesGuardarInputs" method="post" asp-antiforgery="true">
+            <input type="text" class="form-control" hidden="hidden" name="form6PerfilPacienteId" value="@Model.SignosSintomasClinicos[0].Id">
+            <input type="text" class="form-control" hidden="hidden" name="idPaciente" value="@Model.Pacientes.Id">
+            <hr>
+            <h3>Signos Sintomas Clinicos</h3>
+            <br />
+            <div id="form6PerfilPacienteInputs">
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label for="first_name"><h5>Dificultad respiratoria en reposo</h5></label>
+                        <input type="text" class="form-control" disabled name="form6PerfilPacienteDificultadReposo" placeholder="Vacio" value="@Model.SignosSintomasClinicos[0].SSC_DificultadRespiratoriaReposo">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label for="last_name"><h5>Dificultad respiratoria durante actividad física</h5></label>
+                        <input type="text" class="form-control" disabled name="form6PerfilPacienteDificultadFisica" placeholder="Vacio" value="@Model.SignosSintomasClinicos[0].SSC_DificultadRespiratoriaActividadFisica">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label for="last_name"><h5>Neumonías a repetición</h5></label>
+                        <input type="text" class="form-control" disabled name="form6PerfilPacienteNeumonias" placeholder="Vacio" value="@Model.SignosSintomasClinicos[0].SSC_NeumoniasRepeticion">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label for="last_name"><h5> Otras enf. respiratorias a repetición</h5></label>
+                        <input type="text" class="form-control" disabled name="form6PerfilPacienteOtrasNeumonias" placeholder="Vacio" value="@Model.SignosSintomasClinicos[0].SSC_OtrasNeumoniasRepeticion">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label for="last_name"><h5>Dolor de espalda</h5></label>
+                        <input type="text" class="form-control" disabled name="form6PerfilPacienteDolorEspalda" placeholder="Vacio" value="@Model.SignosSintomasClinicos[0].SSC_DolorEspalda">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label for="last_name"><h5>Palpitaciones/Taquicardia</h5></label>
+                        <input type="text" class="form-control" disabled name="form6PerfilPacientePalpitaciones" placeholder="Vacio" value="@Model.SignosSintomasClinicos[0].SSC_PalpitacionesTaquicardia">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label for="last_name"><h5>Otros</h5></label>
+                        <input type="text" class="form-control" disabled name="form6PerfilPacienteOtros" placeholder="Vacio" value="@Model.SignosSintomasClinicos[0].SSC_Otros">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label for="HC_AntecendentesFamilia"><h5>Signos y síntomas Psicosociales</label>
+                        <table>
+                            <tr>
+                                <td>
+                                    <h6>Incomodidad</h6>
+                                </td>
+                                @{
+                                    if (@Model.SignosSintomasClinicos[0].SSC_SignosSintomas[0, 0] != null)
+                                    {
+                                        <td>
+                                            <input type="text" class="form-control" style="color: black;" disabled name="form6PerfilPacienteSignosSintomas" placeholder="Vacio" value="@Model.SignosSintomasClinicos[0].SSC_SignosSintomas[0, 0]">
+                                        </td>
+                                    }
+                                    else if (@Model.SignosSintomasClinicos[0].SSC_SignosSintomas[0, 1] != null)
+                                    {
+                                        <td>
+                                            <input type="text" class="form-control" style="color: black;" disabled name="form6PerfilPacienteSignosSintomas" placeholder="Vacio" value="@Model.SignosSintomasClinicos[0].SSC_SignosSintomas[0, 1]">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <input type="text" class="form-control" style="color: black;" disabled name="form6PerfilPacienteSignosSintomas" placeholder="Vacio" value="">
+                                        </td>
+                                    }
+                                }
+                            </tr>
+                            <tr>
+                                <th>
+                                    <h6>Verguenza</h6>
+                                </th>
+                                @{
+                                    if (@Model.SignosSintomasClinicos[0].SSC_SignosSintomas[1, 0] != null)
+                                    {
+                                        <td>
+                                            <input type="text" class="form-control" style="color: black;" disabled name="form6PerfilPacienteSignosSintomas" placeholder="Vacio" value="@Model.SignosSintomasClinicos[0].SSC_SignosSintomas[1, 0]">
+                                        </td>
+                                    }
+                                    else if (@Model.SignosSintomasClinicos[0].SSC_SignosSintomas[1, 1] != null)
+                                    {
+                                        <td>
+                                            <input type="text" class="form-control" style="color: black;" disabled name="form6PerfilPacienteSignosSintomas" placeholder="Vacio" value="@Model.SignosSintomasClinicos[0].SSC_SignosSintomas[1, 1]">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <input type="text" class="form-control" style="color: black;" disabled name="form6PerfilPacienteSignosSintomas" placeholder="Vacio" value="">
+                                        </td>
+                                    }
+                                }
+                            </tr>                                   
+                            <tr>
+                                <th>
+                                    <h6>Ansiedad</h6>
+                                </th>
+                                @{
+                                    if (@Model.SignosSintomasClinicos[0].SSC_SignosSintomas[2, 0] != null)
+                                    {
+                                        <td>
+                                            <input type="text" class="form-control" style="color: black;" disabled name="form6PerfilPacienteSignosSintomas" placeholder="Vacio" value="@Model.SignosSintomasClinicos[0].SSC_SignosSintomas[2, 0]">
+                                        </td>
+                                    }
+                                    else if (@Model.SignosSintomasClinicos[0].SSC_SignosSintomas[2, 1] != null)
+                                    {
+                                        <td>
+                                            <input type="text" class="form-control" style="color: black;" disabled name="form6PerfilPacienteSignosSintomas" placeholder="Vacio" value="@Model.SignosSintomasClinicos[0].SSC_SignosSintomas[2, 1]">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <input type="text" class="form-control" style="color: black;" disabled name="form6PerfilPacienteSignosSintomas" placeholder="Vacio" value="">
+                                        </td>
+                                    }
+                                }
+                            </tr>  
+                            <tr>
+                                <th>
+                                    <h6>Angustia</h6>
+                                </th>
+                                @{
+                                    if (@Model.SignosSintomasClinicos[0].SSC_SignosSintomas[3, 0] != null)
+                                    {
+                                        <td>
+                                            <input type="text" class="form-control" style="color: black;" disabled name="form6PerfilPacienteSignosSintomas" placeholder="Vacio" value="@Model.SignosSintomasClinicos[0].SSC_SignosSintomas[3, 0]">
+                                        </td>
+                                    }
+                                    else if (@Model.SignosSintomasClinicos[0].SSC_SignosSintomas[3, 1] != null)
+                                    {
+                                        <td>
+                                            <input type="text" class="form-control" style="color: black;" disabled name="form6PerfilPacienteSignosSintomas" placeholder="Vacio" value="@Model.SignosSintomasClinicos[0].SSC_SignosSintomas[3, 1]">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <input type="text" class="form-control" style="color: black;" disabled name="form6PerfilPacienteSignosSintomas" placeholder="Vacio" value="">
+                                        </td>
+                                    }
+                                }
+                            </tr>
+                            <tr>
+                                <th>
+                                    <h6>Tristeza</h6>
+                                </th>
+                                @{
+                                    if (@Model.SignosSintomasClinicos[0].SSC_SignosSintomas[4, 0] != null)
+                                    {
+                                        <td>
+                                            <input type="text" class="form-control" style="color: black;" disabled name="form6PerfilPacienteSignosSintomas" placeholder="Vacio" value="@Model.SignosSintomasClinicos[0].SSC_SignosSintomas[4, 0]">
+                                        </td>
+                                    }
+                                    else if (@Model.SignosSintomasClinicos[0].SSC_SignosSintomas[4, 1] != null)
+                                    {
+                                        <td>
+                                            <input type="text" class="form-control" style="color: black;" disabled name="form6PerfilPacienteSignosSintomas" placeholder="Vacio" value="@Model.SignosSintomasClinicos[0].SSC_SignosSintomas[4, 1]">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <input type="text" class="form-control" style="color: black;" disabled name="form6PerfilPacienteSignosSintomas" placeholder="Vacio" value="">
+                                        </td>
+                                    }
+                                }
+                            </tr>
+                            <tr>
+                                <th>
+                                    <h6>Sentimientos de Inferioridad</h6>
+                                </th>
+                                @{
+                                    if (@Model.SignosSintomasClinicos[0].SSC_SignosSintomas[5, 0] != null)
+                                    {
+                                        <td>
+                                            <input type="text" class="form-control" style="color: black;" disabled name="form6PerfilPacienteSignosSintomas" placeholder="Vacio" value="@Model.SignosSintomasClinicos[0].SSC_SignosSintomas[5, 0]">
+                                        </td>
+                                    }
+                                    else if (@Model.SignosSintomasClinicos[0].SSC_SignosSintomas[5, 1] != null)
+                                    {
+                                        <td>
+                                            <input type="text" class="form-control" style="color: black;" disabled name="form6PerfilPacienteSignosSintomas" placeholder="Vacio" value="@Model.SignosSintomasClinicos[0].SSC_SignosSintomas[5, 1]">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <input type="text" class="form-control" style="color: black;" disabled name="form6PerfilPacienteSignosSintomas" placeholder="Vacio" value="">
+                                        </td>
+                                    }
+                                }
+                            </tr>
+                            <tr>
+                                <th>
+                                    <h6>Dificultad para relacionarse con otras personas</h6>
+                                </th>
+                                @{
+                                    if (@Model.SignosSintomasClinicos[0].SSC_SignosSintomas[6, 0] != null)
+                                    {
+                                        <td>
+                                            <input type="text" class="form-control" style="color: black;" disabled name="form6PerfilPacienteSignosSintomas" placeholder="Vacio" value="@Model.SignosSintomasClinicos[0].SSC_SignosSintomas[6, 0]">
+                                        </td>
+                                    }
+                                    else if (@Model.SignosSintomasClinicos[0].SSC_SignosSintomas[6, 1] != null)
+                                    {
+                                        <td>
+                                            <input type="text" class="form-control" style="color: black;" disabled name="form6PerfilPacienteSignosSintomas" placeholder="Vacio" value="@Model.SignosSintomasClinicos[0].SSC_SignosSintomas[6, 1]">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <input type="text" class="form-control" style="color: black;" disabled name="form6PerfilPacienteSignosSintomas" placeholder="Vacio" value="">
+                                        </td>
+                                    }
+                                }
+                            </tr>                       
+                            <tr>
+                                <th>
+                                    <h6>Otros</h6>
+                                </th>
+                                @{
+                                    if (@Model.SignosSintomasClinicos[0].SSC_SignosSintomas[7, 0] != null)
+                                    {
+                                        <td>
+                                            <input type="text" class="form-control" style="color: black;" disabled name="form6PerfilPacienteSignosSintomas" placeholder="Vacio" value="@Model.SignosSintomasClinicos[0].SSC_SignosSintomas[7, 0]">
+                                        </td>
+                                    }
+                                    else if (@Model.SignosSintomasClinicos[0].SSC_SignosSintomas[7, 1] != null)
+                                    {
+                                        <td>
+                                            <input type="text" class="form-control" style="color: black;" disabled name="form6PerfilPacienteSignosSintomas" placeholder="Vacio" value="@Model.SignosSintomasClinicos[0].SSC_SignosSintomas[7, 1]">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <input type="text" class="form-control" style="color: black;" disabled name="form6PerfilPacienteSignosSintomas" placeholder="Vacio" value="">
+                                        </td>
+                                    }
+                                }
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label for="last_name"><h5>Tipo Pectus</h5></label>
+                        <input type="text" class="form-control" disabled name="" placeholder="Otras Alergias" value="@Model.SignosSintomasClinicos[0].SSC_TipoPectusNombre">
+                    </div>
+                </div>
+            </div>
+            <div id="buttonsSubmitForm6SistemaCompresorEditar" hidden="hidden" class="form-group">
+                <div class="col-xs-12">
+                    <br>
+                    <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Guardar</button>
+                    <button id="buttonForm6SistemaCompresorEditarHidden" class="btn btn-lg btn-danger" type="button"><span class="fa fa-window-close"></span></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

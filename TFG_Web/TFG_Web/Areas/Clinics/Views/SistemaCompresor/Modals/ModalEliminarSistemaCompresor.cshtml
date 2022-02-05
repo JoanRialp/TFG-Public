@@ -1,0 +1,21 @@
+﻿<div class="modal fade" role="dialog" id="modalEliminarSistemaCompresor">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content text-center">
+            <form id="" asp-area="Clinics" asp-controller="SistemaCompresor" asp-action="eliminarSistemaCompresor" asp-route-pacienteId="@Model.Pacientes.Id" asp-route-sistemaCompresorId="@Model.ControlSistemaCompresor.Id" method="post" asp-antiforgery="true">
+                <div class="modal-header">
+                    <p class="font-weight-bold">Eliminar Sistema Compresor</p>
+                    <button type="button" class="btn btn-danger" id="buttonPopupCerrarEliminarSistemaCompreosr"> <span class="fa fa-window-close"></span> </button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Estas seguro/a de eliminar el sistema compresor?</p>
+                    <div id="spinner_ModalSubmitFormNuevoUsuario" hidden="hidden" class="spinner-border" role="status">
+                        <span class="sr-only"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="" type="submit" class="btn btn-success ui-scroll-popup font-weight-bold float-right"> Si </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

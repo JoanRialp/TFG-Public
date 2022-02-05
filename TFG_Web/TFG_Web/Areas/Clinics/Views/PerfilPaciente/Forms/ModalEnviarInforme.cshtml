@@ -1,0 +1,45 @@
+﻿<div class="modal fade" role="dialog" id="modalEnviarInformePaciente">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content text-left">
+            <form asp-area="Clinics" asp-controller="EnviarCorreoPaciente" asp-action="emailMessage" method="post" enctype="multipart/form-data" asp-antiforgery="true">
+                <div class="modal-header">
+                    <p class="font-weight-bold">Enviar Correo Paciente</p>
+                    <button type="button" class="btn btn-danger" id="buttonPopupCerrarEnviarInforme"> <span class="fa fa-window-close"></span> </button>
+                    <input type="text" hidden="hidden" name="idPaciente" value="@Model.Pacientes.Id"/>
+                </div>
+                <div class="modal-body">
+                    @*<partial name="../../PlantillaInformePaciente/Index.cshtml" />*@
+                    <p>
+                        <strong>Desde:</strong> 
+                        <input type="email" required pattern="[a-z0-9._%+-]+@("@")gmail\.com$" disabled class="form-control" name="" placeholder="Vacio" value="@Model.Usuarios.P_Correo">
+                    </p>
+                    <p>
+                        <strong>Para: (@("@")gmail.com)</strong> 
+                        <input type="email" required pattern="[a-z0-9._%+-]+@("@")gmail\.com$" class="form-control" name="correoPara" placeholder="Vacio" value="@Model.Pacientes.P_Correo">
+                    </p>
+                    <p>
+                        <strong>Asunto:</strong> 
+                        <input type="text" class="form-control" name="correoAsunto" placeholder="Vacio" value="Informe Paciente @Model.Pacientes.P_Nombre">
+                    </p>
+                    <p>
+                        <strong>Descripción:</strong>
+                        <input type="text" class="form-control" name="correoDescripcion" placeholder="Vacio" value="">
+                    </p>
+                    <div>
+                        <span>
+                            <i class="fas fa-file-pdf"></i>
+                            <span>Selecciona un archivo:</span>
+                            <input type="file" name="postedFiles" accept="application/pdf" />
+                        </span>
+                    </div>
+                    <div id="spinner_ModalSubmitFormNuevoUsuario" hidden="hidden" class="spinner-border" role="status">
+                        <span class="sr-only"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="" type="submit" class="btn btn-success ui-scroll-popup font-weight-bold float-right"> Enviar <span class="fa fa-paper-plane"></span> </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

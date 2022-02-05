@@ -1,0 +1,146 @@
+﻿@model ViewModel
+
+@{
+    ViewData["Title"] = "Informe Paciente";
+}
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Informe Paciente</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/font-awesome/css/all.css" rel="stylesheet" />
+
+</head>
+<body>
+
+    <table width="100%">
+        <tr>
+            <td>
+                <i class="fas fa-hospital-symbol fa-7x" style="color: Dodgerblue;padding-left:10px"></i>
+            </td>
+            <td align="left">
+                <h2 style="padding-top:8%;text-align:left">
+                    Informe Paciente
+                </h2>
+            </td>
+            <td align="right" style="text-align:right">
+                <h5>Fecha Inicio: @Model.HistorialClinico.HC_FechaPrimeraConsulta.ToString("dd'/'MM'/'yyyy")</h5>
+                <h5>Fecha Fin: @Model.HistorialClinico.HC_FechaUltimaConsulta?.ToString("dd'/'MM'/'yyyy")</h5>
+            </td>
+        </tr>
+    </table>
+
+    <div class="row">
+        <div class="col-lg-4 text-left" style="padding-top:6%">
+            <h5><strong>Nombre: </strong> @Model.HistorialClinico.HC_Nombre @Model.HistorialClinico.HC_Apellidos</h5>
+            <h5><strong>Edad: </strong> @Model.HistorialClinico.HC_Edad</h5>
+            <h5><strong>Genero: </strong> @Model.HistorialClinico.HC_Genero</h5>
+            <h5><strong>A que edad notaron la Deformidad Torácica: </strong> @Model.HistorialClinico.HC_EdadNotaronDeformidadToracica</h5>
+            <h5><strong>Motivo Consulta: </strong> @Model.HistorialClinico.HC_MotivoConsulta</h5>
+            <br/>
+            <h5>
+                <strong>Antecedentes Familiares: </strong>
+            </h5>
+            <table class="table table-bordered" style="text-align:center">
+                <thead>
+                    <tr>
+                        <th>
+                            Pectus Carinatum
+                        </th>
+                        <th>
+                            Pectus Excavatum
+                        </th>
+                        <th>
+                            Otras Malformaciones
+                        </th>
+                        <th>
+                            Escoliosis que requirió tratamiento
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < 4; i++)
+                    {
+                        <tr>
+                            <td>
+                                @Model.HistorialClinico.HC_AntecendentesFamilia[0, i]
+                            </td>
+                            <td>
+                                @Model.HistorialClinico.HC_AntecendentesFamilia[1, i]
+                            </td>
+                            <td>
+                                @Model.HistorialClinico.HC_AntecendentesFamilia[2, i]
+                            </td>
+                            <td>
+                                @Model.HistorialClinico.HC_AntecendentesFamilia[3, i]
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <br/>
+            <h5>
+                <strong>Evolución (Imágenes): </strong>
+            </h5>
+
+            <table class="table">
+                @{
+                    var numero = 1;
+
+                    @for (int i = 0; i < (Model.ImageList.Count / 3); i++)
+                    {
+                        <tr>
+                            @for (int e = i * 3; e < numero * 3; e++)
+                            {
+                            <td>
+                                @{
+                                    <img class="float-left p-2" src='@Url.Action("ObtenerImagenesPaciente", "ImagenesEvolucionPaciente", new { id = @Model.Pacientes.Id, nameImage = @Model.ImageList[e]})'
+                                        alt="Evolucion Paciente" width="300" height="300" />
+                                    }
+                                </td>
+                            }
+                        </tr>
+                        numero = numero + 1;
+                    }
+                }
+
+                @if (Model.ImageList.Count % 3 == 1)
+                {
+                    <tr>
+                        <td>
+                            @{
+                                <img class="float-left p-2" src='@Url.Action("ObtenerImagenesPaciente", "ImagenesEvolucionPaciente", new { id = @Model.Pacientes.Id, nameImage = @Model.ImageList[Model.ImageList.Count - 1]})'
+                                     alt="Evolucion Paciente" width="300" height="300" />
+                            }
+                        </td>
+                    </tr>
+                }
+                @if (Model.ImageList.Count % 3 == 2)
+                {
+                    <tr>
+                        <td>
+                            @{
+                                <img class="float-left p-2" src='@Url.Action("ObtenerImagenesPaciente", "ImagenesEvolucionPaciente", new { id = @Model.Pacientes.Id, nameImage = @Model.ImageList[Model.ImageList.Count - 1]})'
+                                     alt="Evolucion Paciente" width="300" height="300" />
+                            }
+                        </td>
+                        <td>
+                            @{
+                                <img class="float-left p-2" src='@Url.Action("ObtenerImagenesPaciente", "ImagenesEvolucionPaciente", new { id = @Model.Pacientes.Id, nameImage = @Model.ImageList[Model.ImageList.Count - 2]})'
+                                     alt="Evolucion Paciente" width="300" height="300" />
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</body>
+</html>

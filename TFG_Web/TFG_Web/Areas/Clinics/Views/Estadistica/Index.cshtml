@@ -1,0 +1,47 @@
+﻿@model ViewModel
+@{
+    ViewData["Title"] = "Estadística/Análisis";
+}
+
+<div class="d-flex justify-content-center flex-column">
+    <div class="jumbotron text-center">
+        <h1>Estadística/Análisis</h1>
+    </div>
+
+    <p style="color:red">Mantenimiento</p>
+
+    <!--Barra lateral-->
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div style="width:50%; height:60%;display:inline-block">
+                <div>
+                    <h5>Grafica</h5>
+                </div>
+                <div>
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+
+            <div style="float: right; height: 100vh; width:20%; display:inline-block;">
+                <h5>Pacientes</h5>
+                    <table class="table table-bordered table-sm table-striped">
+                        <thead>
+                            <tr class="text-center align-text-bottom" style="background-color:#87CEFA">
+                                <th style="vertical-align: middle" scope="col">Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var pacientes in Model.ListPacientes)
+                            {
+                            <tr class="text-sm-center">
+                                <td cope="row" style="cursor: pointer;" onclick="location.href = '@(Url.Action("estadisticaUsuario", "Estadistica", new {  id = pacientes.Id }))'">
+                                    @pacientes.P_Nombre @pacientes.P_Apellidos <span class="fa fa-edit"></span>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+    </div>
+</div>

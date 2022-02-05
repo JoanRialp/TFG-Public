@@ -1,0 +1,68 @@
+﻿@{
+    ViewData["Title"] = "Iniciar";
+}
+@model UserLoginView
+
+<main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
+    <div class="container">
+        <div class="card login-card">
+            <div class="row no-gutters">
+                <div class="col-md-5">
+                    <img src="~/img/loginWallpaper.jpg" alt="login" class="login-card-img">
+                </div>
+                <div class="col-md-7">
+                    <div class="card-body">
+                        <div class="brand-wrapper">
+                            <i>Logo</i>
+                            @* <img src="~/img/loginLogo.png" alt="logo" class="logo">*@
+                        </div>
+                        <p class="login-card-description">
+                            Iniciar sesión en su cuenta
+                        </p>
+                        <form id="LoginForm" class="text-left" asp-area="" asp-controller="LoginUsuario" asp-action="LogInUser" method="post">
+                            <div class="form-label-group">
+                                <div class="form-group">
+                                    <input asp-for="Input.UserBD" type="email" class="form-control" placeholder="Correo" autofocus />
+                                    <div>
+                                        <span asp-validation-for="Input.UserBD" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="passwordContainer">
+                                    <input asp-for="Input.PasswordBD" type="password" class="form-control" placeholder="Contraseña" />
+                                </div>
+                                <div>
+                                    <span asp-validation-for="Input.PasswordBD" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <span>                                
+                                    @if (Model.ErrorMessage)
+                                    {
+                                        <p style="color:red;font-size:small">Contraseña incorrecta. Vuelve a intentarlo o selecciona &#147;¿Has olvidado tu contraseña?&#34; para cambiarla.</p>
+                                    }
+                                </span>
+                            </div>
+                            <button id="buttonLogIn" class="btn btn-block login-btn mb-4" type="button">
+                                <span id="spinnerLogIn" style="display:inline-block" hidden="hidden" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                Siguiente
+                            </button>
+                            <input id="submitFormLogIn" type="submit" class="fadeIn fourth btn btn-primary" hidden="hidden">
+
+                        </form>
+                        <br/>
+                        <p class="login-card-footer-text">¿Has olvidado tu contraseña? 
+                            <a class="text-reset" style="color:deepskyblue" asp-area="" asp-controller="RecuperarContrasena" asp-action="Index"> Recuperar</a>
+                        </p>
+                        <nav class="login-card-footer-nav">
+                            <a>&copy; 2021 - TFG_Web -</a>
+                            <a href="#!">Terms of use.</a>
+                            <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy policy</a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,22 @@
+﻿@model ViewModel
+@{
+    ViewData["Title"] = "Estadística Paciente";
+}
+
+<div class="d-flex justify-content-center flex-column">
+    <div class="jumbotron text-center">
+        <h1>Estadística Paciente</h1>
+        <h2> @Model.Pacientes.P_Nombre</h2>
+    </div>
+
+    <p style="color:red">Mantenimiento</p>
+
+    <div style="width:50%; height:60%;display:inline-block">
+        <div>
+            <h5>Grafica</h5>
+        </div>
+        <div>
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
+</div>

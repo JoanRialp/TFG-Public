@@ -1,0 +1,442 @@
+﻿@model ViewModel
+@{
+    ViewData["Title"] = "Perfil Paciente";
+}
+
+<div class="d-flex justify-content-center flex-column">
+    <div class="jumbotron text-center">
+        <h1>Información Paciente</h1>
+    </div>
+
+    @if (Model.NotificacionesControl)
+    {
+        @if (Model.Notificaciones)
+        {
+            <div class="alert alert-success" role="alert">
+                <p>@Model.NotificacionesMensaje</p>
+            </div>
+        }
+
+        @if (!Model.Notificaciones)
+        {
+            <div class="alert alert-danger" role="alert">
+                <p>@Model.NotificacionesMensaje</p>
+            </div>
+        }
+    }
+
+    <div class=" bootstrap snippet">
+        <div class="row">
+            <div class="col-sm-6 col-md-9 col-lg-6">
+                <h2 style="display:inline">@Model.HistorialClinico.HC_Nombre @Model.HistorialClinico.HC_Apellidos</h2>
+                @if (Model.Pacientes.P_Finalizado)
+                {
+                <h5 style="color:red; display:inline">Finalizado</h5>
+                }
+            </div>
+
+            @*Nav Paginas*@
+            <div class="col-sm-3 col-md-3 col-lg-3">
+                @if (Model.HistorialClinico.HC_TipoPectus == "1")
+                {
+                <ul class="nav nav-pills nav-justified mb-3" role="tablist" style="background-color: #e3f2fd;">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="navPagina1FormPerfilHistorial" data-toggle="pill" href="#formHistorial1" role="tab" aria-controls="form1" aria-selected="true">Historial 1</a>
+                    </li>
+                    @if (Model.HistorialClinico2 != null)
+                        {
+                    <li class="nav-item">
+                        <a class="nav-link" id="navPagina2FormPerfilHistorial" data-toggle="pill" href="#formHistorial2" role="tab" aria-controls="form2" aria-selected="false">Historial 2</a>
+                    </li>
+                        }
+                        else
+                        {
+                    <li class="nav-item">
+                        <a class="nav-link disabled" id="navPagina2FormPerfilHistorial" data-toggle="pill" href="#formHistorial2" role="tab" aria-controls="form2" aria-selected="false">Historial 2</a>
+                    </li>
+                        }
+                </ul>
+                }
+            </div>
+
+            <!--#region Botones de Ajustes  -->
+            <div class="col-sm-3 col-md-12 col-lg-3" style="text-align:right">
+                @if (!Model.Pacientes.P_Finalizado)
+                {
+                <button id="buttonPerfilPacienteEditarInputs" class="btn btn-primary" navActive="form1" type="button" style="display:inline-block">
+                    <i class="fas fa-edit"></i>
+                    Editar
+                </button>
+                }
+                <div class="dropdown" style="display:inline-block">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-tools"></i>
+                        Ajuestes de paciente
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        @if (!Model.Pacientes.P_Finalizado)
+                        {
+                            @if (Model.SignosSintomasClinicos[0] != null)
+                            {
+                                @if (Model.SignosSintomasClinicos[0].SSC_TipoPectusNombre != "PectusExcavatum")
+                                {
+                                    <a class="dropdown-item" asp-area="Clinics" asp-controller="FormControlSistemaCompresor" asp-action="IndexId" asp-route-id="@Model.Pacientes.Id">
+                                        <i class="fas fa-plus"></i>
+                                        Sistema Compresor
+                                    </a>
+                                }
+
+                                @if (Model.SignosSintomasClinicos[0].SSC_TipoPectusNombre != "PectusCarinatum")
+                                {
+                                    <a class="dropdown-item" asp-area="Clinics" asp-controller="FormControlCampanaPectusExcavatum" asp-action="IndexId" asp-route-id="@Model.Pacientes.Id">
+                                        <i class="fas fa-plus"></i>
+                                        Pectus Excavatum
+                                    </a>
+                                }
+                            }
+
+                            @if (Model.HistorialClinico.HC_TipoPectus == "1" && Model.HistorialClinico2 == null)
+                            {
+                                <a class="dropdown-item" asp-area="Clinics" asp-controller="NuevoUsuario" asp-action="IndexIdPaciente" asp-route-id="@Model.Pacientes.Id">
+                                    <i class="fas fa-plus"></i>
+                                    Añadir historial 2
+                                </a>
+                            }
+                        }
+                        <a id="perfilPacienteGenerarInformer" class="dropdown-item" style="cursor: pointer;" idPaciente="@Model.Pacientes.Id">
+                            <i class="fas fa-file-pdf"></i>
+                            Generar Informe
+                        </a>
+                        <a id="buttonModalEnviarInforme" class="dropdown-item" style="cursor: pointer;">
+                            <i class="fas fa-share"></i>
+                            Enviar Correo
+                        </a>
+                        @if (!Model.Pacientes.P_Finalizado)
+                        {
+                            <a id="buttonModalFinalizarTratamiento" class="dropdown-item" style="cursor: pointer;">
+                                <i class="fas fa-ban"></i>
+                                Finalizar Tratamiento
+                            </a>
+                        }
+                        <a id="buttonModalEliminarPaciente" class="dropdown-item" style="cursor: pointer;">
+                            <i class="fas fa-trash"></i>
+                            Eliminar Paciente
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!--#endregion -->
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-sm-3">
+                <!--left col-->
+                <br />
+                <div class="text-center">
+                    <i class="fas fa-user-circle fa-5x"></i>
+                </div>
+
+                <br />
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h5><i class="fas fa-mail-bulk fa-2x"></i> &nbsp; Correo </h5>
+                    </div>
+                    <div class="panel-body">
+                        @if (Model.Pacientes.P_Correo != null)
+                        {
+                        @Model.Pacientes.P_Correo
+                        }
+                        else
+                        {
+                        <p>xxxx@gmail.com</p>
+                        }
+                    </div>
+                </div>
+                <br />
+                <ul class="list-group">
+                    <li class="list-group-item text-muted">Actividad <i class="fa fa-chart-line fa-1x"></i></li>
+                    <li class="list-group-item text-right">
+                        <span class="pull-left float-left">
+                            <i class="fas fa-image fa-2x"></i>
+                            <a asp-controller="ImagenesEvolucionPaciente" asp-action="Index" asp-route-id=@Model.Pacientes.Id>
+                                <strong>Imágenes</strong>
+                            </a>
+                        </span>
+                        <span>@Model.ImageList.Count</span>
+                    </li>
+                    <li class="list-group-item text-right"><span class="pull-left float-left"><strong>Archivos</strong></span> 1</li>
+                    <li class="list-group-item text-right"><span class="pull-left float-left"><strong>...</strong></span> 0</li>
+                </ul>
+                <br />
+            </div><!--/col-3-->
+            <div class="tab-content  col-sm-9">
+                <!--right col-->
+                <!--#region Form Historial 1  -->
+                <div class="tab-pane fade show active" id="formHistorial1" role="tabpanel" aria-labelledby="navPagina1FormPerfilHistorial">
+                    @*Nav Paginas*@
+                    <ul class="nav nav-tabs mb-3" role="tablist" style="background-color: #e3f2fd;">
+                        <li class="nav-item">
+                            <a id="navPagina1FormPerfilPacinet" class="nav-link active" data-toggle="pill" href="#formHistorial1 #form1" role="tab" aria-controls="form1" aria-selected="true">Perfil</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="dropdownListPectus" href="" data-toggle="dropdown" aria-selected="false" aria-haspopup="true" aria-expanded="false">Historial Clinico</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                @if (Model.CirugiaPrevia[0] != null)
+                                {
+                                    <a id="navPagina2FormPerfilPacinet" class="dropdown-item" data-toggle="pill" href="#formHistorial1 #form2" role="tab" aria-controls="form2" aria-selected="false">Cirugia Previa</a>
+                                }
+                                @if (Model.Anamnesis[0] != null)
+                                {
+                                    <a id="navPagina3FormPerfilPacinet" class="dropdown-item" data-toggle="pill" href="#formHistorial1 #form3" role="tab" aria-controls="form3" aria-selected="false">Anamnesis</a>
+                                }
+                                @if (Model.EnfermdedadPreexistente[0] != null)
+                                {
+                                    <a id="navPagina4FormPerfilPacinet" class="dropdown-item" data-toggle="pill" href="#formHistorial1 #form4" role="tab" aria-controls="form4" aria-selected="false">Enfermdedad Preexistente</a>
+
+                                }
+                                @if (Model.Deporte[0] != null)
+                                {
+                                    <a id="navPagina5FormPerfilPacinet" class="dropdown-item" data-toggle="pill" href="#formHistorial1 #form5" role="tab" aria-controls="form5" aria-selected="false">Deporte</a>
+                                }
+                                @if (Model.SignosSintomasClinicos[0] != null)
+                                {
+                                    <a id="navPagina6FormPerfilPacinet" class="dropdown-item" data-toggle="pill" href="#formHistorial1 #form6" role="tab" aria-controls="form6" aria-selected="false">Signos Sintomas Clinicos</a>
+                                }
+                                @if (Model.SignosSintomasClinicos[0] != null)
+                                {
+                                    @if (Model.SignosSintomasClinicos[0].SSC_TipoPectus != null)
+                                    {
+                                        <a id="navPagina7FormPerfilPacinet" class="dropdown-item" data-toggle="pill" href="#formHistorial1 #form7" role="tab" aria-controls="form7" aria-selected="false">Clasificacion Pectus</a>
+                                    }
+                                }
+                            </div>
+                        </li>
+                        @if (Model.SignosSintomasClinicos[0] != null)
+                        {
+                            @if (Model.SignosSintomasClinicos[0].SSC_TipoPectusNombre != "PectusExcavatum")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" id="navPagina8FormUsuario" data-toggle="pill" href="#formHistorial1 #form8" role="tab" aria-controls="form8" aria-selected="false">Sistema Compresor</a>
+                                </li>
+                            }
+
+                            @if (Model.SignosSintomasClinicos[0].SSC_TipoPectusNombre != "PectusCarinatum")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" id="navPagina9FormUsuario" data-toggle="pill" href="#formHistorial1 #form9" role="tab" aria-controls="form9" aria-selected="false">Campana Pectus Exacavatum</a>
+                                </li>
+                            }
+                        }
+                    </ul>
+
+                    @*Formulario Perfil Paciente*@
+                    <div class="tab-content">
+                        <partial name="Forms/Form1.cshtml" />
+                        @if (Model.CirugiaPrevia[0] != null)
+                        {
+                            <partial name="Forms/Form2.cshtml" />
+                        }
+                        @if (Model.Anamnesis[0] != null)
+                        {
+                            <partial name="Forms/Form3.cshtml" />
+                        }
+                        @if (Model.EnfermdedadPreexistente[0] != null)
+                        {
+                            <partial name="Forms/Form4.cshtml" />
+                        }
+                        @if (Model.Deporte[0] != null)
+                        {
+                            <partial name="Forms/Form5.cshtml" />
+                        }
+                        @if (Model.SignosSintomasClinicos[0] != null)
+                        {
+                            <partial name="Forms/Form6.cshtml" />
+                        }
+                        @if (Model.SignosSintomasClinicos[0] != null)
+                        {
+                            @if (Model.SignosSintomasClinicos[0].SSC_TipoPectus != null)
+                            {
+                                <partial name="Forms/FormTipoPectus.cshtml" />
+                            }
+                        }
+                       
+                        @if (Model.SignosSintomasClinicos[0] != null)
+                        {
+                            @if (Model.SignosSintomasClinicos[0].SSC_TipoPectusNombre != "PectusExcavatum")
+                            {
+                                <partial name="Forms/FormSistemaCompresor.cshtml" model="@Model" />
+                            }
+
+                            @if (Model.SignosSintomasClinicos[0].SSC_TipoPectusNombre != "PectusCarinatum")
+                            {
+                                <partial name="Forms/FormCampanaPectusExcavatum.cshtml" model="@Model" />
+                            }
+                        }
+
+                    </div>
+                    <hr>
+                </div>
+                <!--#endregion -->
+                <!--#region Form Historial 2  -->
+                @{
+                    try
+                    {
+                        if (Model.HistorialClinico2 != null)
+                        {
+                            <div class="tab-pane fade" id="formHistorial2" role="tabpanel" aria-labelledby="navPagina2FormPerfilHistorial">
+                                @*Nav Paginas*@
+                                <ul class="nav nav-tabs mb-3" role="tablist" style="background-color: #e3f2fd;">
+                                    <li class="nav-item">
+                                        <a id="navPagina1FormPerfilPacinet" class="nav-link active" data-toggle="pill" href="#formHistorial2 #form1" role="tab" aria-controls="form1" aria-selected="true">Perfil</a>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" id="dropdownListPectus" href="" data-toggle="dropdown" aria-selected="false" aria-haspopup="true" aria-expanded="false">Historial Clinico</a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                            @if (Model.CirugiaPrevia[1] != null)
+                                            {
+                                                <a id="navPagina2FormPerfilPacinet" class="dropdown-item" data-toggle="pill" href="#formHistorial2 #form2" role="tab" aria-controls="form2" aria-selected="false">Cirugia Previa</a>
+                                            }
+                                            @if (Model.Anamnesis[1] != null)
+                                            {
+                                                <a id="navPagina3FormPerfilPacinet" class="dropdown-item" data-toggle="pill" href="#formHistorial2 #form3" role="tab" aria-controls="form3" aria-selected="false">Anamnesis</a>
+                                            }
+                                            @if (Model.EnfermdedadPreexistente[1] != null)
+                                            {
+                                                <a id="navPagina4FormPerfilPacinet" class="dropdown-item" data-toggle="pill" href="#formHistorial2 #form4" role="tab" aria-controls="form4" aria-selected="false">Enfermdedad Preexistente</a>
+                                            }
+                                            @if (Model.Deporte[1] != null)
+                                            {
+                                                <a id="navPagina5FormPerfilPacinet" class="dropdown-item" data-toggle="pill" href="#formHistorial2  #form5" role="tab" aria-controls="form5" aria-selected="false">Deporte</a>
+                                            }
+                                            @if (Model.SignosSintomasClinicos[1] != null)
+                                            {
+                                                <a id="navPagina6FormPerfilPacinet" class="dropdown-item" data-toggle="pill" href="#formHistorial2 #form6" role="tab" aria-controls="form6" aria-selected="false">Signos Sintomas Clinicos</a>
+
+                                                try
+                                                {
+                                                    @if (Model.SignosSintomasClinicos[1].SSC_TipoPectus != null)
+                                                    {
+                                                        <a id="navPagina7FormPerfilPacinet" class="dropdown-item" data-toggle="pill" href="#formHistorial2 #form7" role="tab" aria-controls="form7" aria-selected="false">Clasificacion Pectus</a>
+                                                    }
+                                                }
+                                                catch { }
+                                            }
+
+                                        </div>
+                                    </li>
+
+                                    @if (Model.SignosSintomasClinicos[1] != null)
+                                    {
+                                        @if (Model.SignosSintomasClinicos[1].SSC_TipoPectusNombre != "PectusExcavatum")
+                                        {
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="navPagina8FormUsuario" data-toggle="pill" href="#formHistorial2 #form8" role="tab" aria-controls="form8" aria-selected="false">Sistema Compresor</a>
+                                            </li>
+                                        }
+
+                                        @if (Model.SignosSintomasClinicos[1].SSC_TipoPectusNombre != "PectusCarinatum")
+                                        {
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="navPagina9FormUsuario" data-toggle="pill" href="#formHistorial2 #form9" role="tab" aria-controls="form9" aria-selected="false">Campana Pectus Exacavatum</a>
+                                            </li>
+                                        }
+                                    }
+
+                                </ul>
+
+                                @*Formulario Perfil Paciente*@
+                            <div class="tab-content">
+                                @{Model.HistorialClinico = Model.HistorialClinico2;}
+
+                                <partial name="Forms/Form1.cshtml" model="@Model" />
+
+                                @if (Model.CirugiaPrevia[1] != null)
+                                {
+                                    Model.CirugiaPrevia[0] = Model.CirugiaPrevia[1];
+                                    <partial name="Forms/Form2.cshtml" model="@Model" />
+                                }
+                                @if (Model.Anamnesis[1] != null)
+                                {
+                                    Model.Anamnesis[0] = Model.Anamnesis[1];
+                                    <partial name="Forms/Form3.cshtml" model="@Model" />
+                                }
+                                @if (Model.EnfermdedadPreexistente[1] != null)
+                                {
+                                    Model.EnfermdedadPreexistente[0] = Model.EnfermdedadPreexistente[1];
+                                    <partial name="Forms/Form4.cshtml" model="@Model" />
+                                }
+                                @if (Model.Deporte[1] != null)
+                                {
+                                    Model.Deporte[0] = Model.Deporte[1];
+                                    <partial name="Forms/Form5.cshtml" model="@Model" />
+                                }
+                                @if (Model.SignosSintomasClinicos[1] != null)
+                                {
+                                    Model.SignosSintomasClinicos[0] = Model.SignosSintomasClinicos[1];
+                                    <partial name="Forms/Form6.cshtml" model="@Model" />
+                                }
+                                @{
+                                    try
+                                    {
+                                        if (Model.SignosSintomasClinicos[1] != null)
+                                        {
+                                            if (Model.SignosSintomasClinicos[1].SSC_TipoPectus != null)
+                                            {
+                                                if (Model.PectusCarinatum != null)
+                                                {
+                                                    Model.PectusCarinatum[0] = Model.PectusCarinatum[1];
+                                                    <partial name="Forms/FormTipoPectus.cshtml" model="@Model" />
+                                                }
+                                                if (Model.PectusExcavatum != null)
+                                                {
+                                                    Model.PectusExcavatum[0] = Model.PectusExcavatum[1];
+                                                    <partial name="Forms/FormTipoPectus.cshtml" model="@Model" />
+                                                }
+                                                if (Model.PectusMixto != null)
+                                                {
+                                                    Model.PectusMixto[0] = Model.PectusMixto[1];
+                                                    <partial name="Forms/FormTipoPectus.cshtml" model="@Model" />
+                                                }
+                                                if (Model.SindromePoland != null)
+                                                {
+                                                    Model.SindromePoland[0] = Model.SindromePoland[1];
+                                                    <partial name="Forms/FormTipoPectus.cshtml" model="@Model" />
+                                                }
+                                            }
+                                        }
+
+
+                                    }
+                                    catch { }
+                                }
+
+                                @if (Model.SignosSintomasClinicos[1] != null)
+                                {
+                                    @if (Model.SignosSintomasClinicos[1].SSC_TipoPectusNombre != "PectusExcavatum")
+                                    {
+                                        <partial name="Forms/FormSistemaCompresor.cshtml" model="@Model" />
+                                    }
+
+                                    @if (Model.SignosSintomasClinicos[1].SSC_TipoPectusNombre != "PectusCarinatum")
+                                    {
+                                        <partial name="Forms/FormCampanaPectusExcavatum.cshtml" model="@Model" />
+                                    }
+                                }
+                            </div>
+                                <hr>
+                            </div>
+                        }
+                    }
+                    catch{ }
+                }
+                <!--#endregion -->
+            </div><!--/col-9-->
+        </div>
+    </div>
+
+    @*Modals de los ajustes*@
+    <partial name="Forms/ModalEnviarInforme.cshtml" />
+    <partial name="Forms/ModalEliminarPaciente.cshtml" />
+    <partial name="Forms/ModalFinalizarTratamiento.cshtml" />
+
+</div>

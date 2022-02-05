@@ -1,0 +1,101 @@
+﻿@* From7 Anamnesis*@
+
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <label for="example-text-input" class="col-12 col-form-label">
+                Fuma?
+            </label>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div id="NuevoUsuarioForm7Fuma" class="btn-group-toggle pl-3">
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadioForm7NuevoUsuarioFuma1" value="Si" name="customRadioForm7NuevoUsuarioFuma" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadioForm7NuevoUsuarioFuma1">Si</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadioForm7NuevoUsuarioFuma2" value="No" name="customRadioForm7NuevoUsuarioFuma" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadioForm7NuevoUsuarioFuma2">No</label>
+                </div>
+            </div>
+            <div id="NuevoUsuarioForm7FumaInvalid" class="text-danger col-12" style="visibility: hidden">
+                Indica un valor para Frecuencia
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <label for="example-text-input" class="col-12 col-form-label">
+                Toma alguna medicación?
+            </label>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div id="NuevoUsuarioForm7Medicacion" class="btn-group-toggle pl-3">
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadioForm7NuevoUsuarioMedicacion1" value="Si" name="customRadioForm7NuevoUsuarioMedicacion" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadioForm7NuevoUsuarioMedicacion1">Si</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadioForm7NuevoUsuarioMedicacion2" value="No" name="customRadioForm7NuevoUsuarioMedicacion" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadioForm7NuevoUsuarioMedicacion2">No</label>
+                </div>
+            </div>
+            <div id="NuevoUsuarioForm7MedicacionInvalid" class="text-danger col-12" style="visibility: hidden">
+                Indica un valor para Frecuencia
+            </div>
+        </div>
+    </div>
+    <div id="inputsNuevoUsuarioForm7MedicacionCual" hidden="hidden">
+        <div class="card-header">
+            <div class="row">
+                <label for="example-text-input" class="col-12 col-form-label">
+                    <span class="fa fa-level-down-alt"></span>
+                    Cuál/es?
+                </label>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <input class="form-control" type="text" placeholder="Tu respuesta" name="NuevoUsuarioForm7CualEs">
+                </div>
+                <div id="" class="text-danger col-12" style="visibility: hidden">
+                    Indica un valor para la pregunta
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <label for="example-text-input" class="col-12 col-form-label">
+                Dolor de pecho
+            </label>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div id="NuevoUsuarioForm7Dolor" class="btn-group-toggle pl-3">
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadioForm7NuevoUsuarioDolor1" value="Si" name="customRadioForm7NuevoUsuarioDolor" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadioForm7NuevoUsuarioDolor1">Si</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadioForm7NuevoUsuarioDolor2" value="No" name="customRadioForm7NuevoUsuarioDolor" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadioForm7NuevoUsuarioDolor2">No</label>
+                </div>
+            </div>
+            <div id="NuevoUsuarioForm7DolorInvalid" class="text-danger col-12" style="visibility: hidden">
+                Indica un valor para Dolor de pecho
+            </div>
+        </div>
+    </div>
+    <partial name="Form8.cshtml" />
+</div>

@@ -1,0 +1,332 @@
+﻿@model ViewModel
+@{
+    ViewData["Title"] = "Formulario Control Campana Pectus Excavatum";
+}
+
+<div class="d-flex justify-content-center flex-column">
+    <div class="jumbotron text-center">
+        <h1>Formulario</h1>
+        <h2>Control de Campana Pectus Excavatum</h2>
+    </div>
+
+    @if (Model.NotificacionesControl)
+    {
+        @if (Model.Notificaciones)
+        {
+            <div class="alert alert-success" role="alert">
+                <p>@Model.NotificacionesMensaje</p>
+            </div>
+        }
+
+        @if (Model.Notificaciones == false)
+        {
+            <div class="alert alert-danger" role="alert">
+                <p>@Model.NotificacionesMensaje</p>
+            </div>
+        }
+    }
+
+    @if (Model.id_Paciente == null)
+    {
+        <h5>
+            Selecciona un paciente:
+            <select id="SelectCampanaPectusExcavatumIdPaciente" class="form custom-select col-sm-2" aria-label="Selecciona un paciente">
+                <option selected disabled value="null">Selecciona un paciente...</option>
+                @foreach (var paciente in Model.ListPacientes)
+                {
+                    <option option value=@paciente.Id>@paciente.P_Nombre</option>
+                }
+            </select>
+        </h5>
+    }
+
+    @if (Model.id_Paciente != null)
+    {
+        <h4>Paciente: @Model.Pacientes.P_Nombre @Model.Pacientes.P_Apellidos </h4>
+    }
+
+    @*Error Form - Notificaciones*@
+    <div id="indicarPacienteError" hidden="hidden" class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Error</h4>
+        <p>Indica un paciente</p>
+    </div>
+    <div id="error_ModalSubmitFormCampanaPectusExcavatum" hidden="hidden" class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Error</h4>
+        <p>Rellena los campos obligatorios</p>
+    </div>
+
+    <ul class="nav nav-pills mb-3" role="tablist" style="background-color: #e3f2fd;">
+        <li class="nav-item">
+            <a class="nav-link active" id="navPagina1" data-toggle="pill" href="#form1" role="tab" aria-controls="form1" aria-selected="true">Página 1</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="navPagina2FormControl" data-toggle="pill" href="#form2" role="tab" aria-controls="form2" aria-selected="false">Página 2</a>
+        </li>
+    </ul>
+
+    <br />
+
+    <form id="needs-validation" asp-controller="FormControlCampanaPectusExcavatum" asp-action="AddFormularioControlCampanaExcavatum" method="post" asp-antiforgery="true">
+        @if (Model.id_Paciente != null)
+        {
+            <input id="FormCampanaPectusExcavatumIdPaciente" type="text" hidden="hidden" name="campanaPectusExcavatumIdPaciente" value="@Model.Pacientes.Id">
+        }
+        <input id="FormCampanaPectusExcavatumIdPaciente" type="text" hidden="hidden" name="campanaPectusExcavatumIdPaciente" value="">
+
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="form1" role="tabpanel" aria-labelledby="navPagina1">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <label for="example-date-input" class="col-12 col-form-label">Fecha <a style="color:red"> * </a></label>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <input id="ControlForm1CampanaPectusExcavatumFecha" class="form-control" type="date" placeholder="dd/mm/aaaa" name="campanaPectusExcavatumForm1Fecha">
+                            </div>
+                            <div id="ControlForm1CampanaPectusExcavatumFechaInvalid" class="text-danger col-12" style="visibility: hidden">
+                                Indica un valor para Fecha
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <label for="example-text-input" class="col-12 col-form-label">
+                                Horas de uso día
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <input id="ControlForm1HorasDia" class="form-control" type="number" placeholder="Tu respuesta" name="campanaPectusExcavatumForm1HorasDia">
+                            </div>
+                            <div id="ControlForm1HorasDiaInvalid" class="text-danger col-12" style="visibility: hidden">
+                                Indica un valor paraHoras de uso día
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <label for="example-text-input" class="col-12 col-form-label">
+                                Horas de uso noche
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <input id="ControlForm1HorasNoche" class="form-control" type="number" placeholder="Tu respuesta" name="campanaPectusExcavatumForm1HorasNoche">
+                            </div>
+                            <div id="ControlForm1HorasNocheInvalid" class="text-danger col-12" style="visibility: hidden">
+                                Indica un valor para Horas de uso noche
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <label for="example-text-input" class="col-12 col-form-label">
+                                N° Pumps en uso
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <input id="ControlForm1NumPumpsUso" class="form-control" type="text" placeholder="Tu respuesta" name="campanaPectusExcavatumPumpsUso">
+                            </div>
+                            <div id="ControlForm1NumPumpsUsoInvalid" class="text-danger col-12" style="visibility: hidden">
+                                Indica un valor para N° Pumps en uso
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <label for="example-text-input" class="col-12 col-form-label">
+                                Presión de Tratamiento
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <input id="ControlForm1PresionTratamiento" class="form-control" type="text" placeholder="Tu respuesta" name="campanaPectusExcavatumForm1PresionTratamiento">
+                            </div>
+                            <div id="ControlForm1PresionTratamientoInvalid" class="text-danger col-12" style="visibility: hidden">
+                                Indica un valor para Presión de Tratamiento
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <label for="example-text-input" class="col-12 col-form-label">
+                                En Uso
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <input id="ControlForm1PTPre" class="form-control" type="number" placeholder="Tu respuesta" name="campanaPectusExcavatumForm1EnUso">
+                            </div>
+                            <div id="ControlForm1PTPreInvalid" class="text-danger col-12" style="visibility: hidden">
+                                Indica un valor para En Uso
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <label for="example-text-input" class="col-12 col-form-label">
+                                Indicada
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <input id="ControlForm1Indicar" class="form-control" type="text" placeholder="Tu respuesta" name="campanaPectusExcavatumForm1Indicada">
+                            </div>
+                            <div id="ControlForm1IndicarInvalid" class="text-danger col-12" style="visibility: hidden">
+                                Indica un valor para PT Indicada
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <label for="example-text-input" class="col-12 col-form-label">
+                                N°Pumps Indicados
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <input id="ControlForm1NumPumpsIndicados" class="form-control" type="text" placeholder="Tu respuesta" name="campanaPectusExcavatumForm1NPumpsIndicados">
+                            </div>
+                            <div id="ControlForm1NumPumpsIndicadosInvalid" class="text-danger col-12" style="visibility: hidden">
+                                Indica un valor para N°Pumps Indicados
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3 pt-2 pb-2">
+                    <button id="BtnNextForm1ControlCampanaPectus" class="btn btn-primary" type="button"> Siguiente </button>
+                </div>
+            </div>
+
+            @* From2 *@
+            <div class="tab-pane fade" id="form2" role="tabpanel" aria-labelledby="navPagina2FormControl">
+                <p>
+                    Campana
+                </p>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <label for="example-text-input" class="col-12 col-form-label">
+                                Complicaciones
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <input id="ControlForm1Complicaciones" class="form-control" type="text" placeholder="Tu respuesta" name="campanaPectusExcavatumForm2Complicaciones">
+                            </div>
+                            <div id="ControlForm1ComplicacionesInvalid" class="text-danger col-12" style="visibility: hidden">
+                                Indica un valor para Complicaciones
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <label for="example-text-input" class="col-12 col-form-label">
+                                Fotos
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div id="ControlForm2GroupF2" class="btn-group-toggle pl-3">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2PectusExcavatumFotos1" value="Si" name="customRadioForm2PectusExcavatumFotos" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2PectusExcavatumFotos1">Si</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2PectusExcavatumFotos2" value="No" name="customRadioForm2PectusExcavatumFotos" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2PectusExcavatumFotos2">No</label>
+                                </div>
+                            </div>
+                            <div id="ControlForm2GroupF1Invalid" class="text-danger col-12" style="visibility: hidden">
+                                Indica un valor para Fotos
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <label for="example-text-input" class="col-12 col-form-label">
+                                Observaciones
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <input id="ControlForm1Observaciones" class="form-control" type="text" placeholder="Tu respuesta" name="campanaPectusExcavatumForm2Observaciones">
+                            </div>
+                            <div id="ControlForm1ObservacionesInvalid" class="text-danger col-12" style="visibility: hidden">
+                                Indica un valor para Observaciones
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5 pt-2 pb-2">
+                    <button id="buttonPopupForm1" type="button" class="btn btn-success ui-scroll-popup font-weight-bold"> Crear <span class="fa fa-share"></span> </button>
+                    <input id="submitForm1" type="submit" name="submit" class="btn btn-success" hidden="hidden" />
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="modal fade" id="form1ModalEnviar">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content text-center">
+                <div class="modal-header">
+                    <p class="font-weight-bold">Control de Campana Pectus Excavatum - Crear</p>
+                    <button type="button" class="btn btn-danger" id="buttonPopupCerrar"> <span class="fa fa-window-close"></span> </button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Crear el nuevo formulario?</p>
+                    <div id="spinner_ModalSubmitFormCampanaPectusExcavatum" hidden="hidden" class="spinner-border" role="status">
+                        <span class="sr-only"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="popupConfirmarFormControlCampanaPectusExcavatum" type="button" class="btn btn-success ui-scroll-popup font-weight-bold float-right"> Crear <span class="fa fa-plus"></span> </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

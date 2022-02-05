@@ -1,0 +1,84 @@
+﻿@{
+    ViewData["Title"] = "Imágenes Paciente";
+}
+
+<div class="d-flex justify-content-center flex-column">
+    <div class="jumbotron text-center">
+        <h1>Imágenes Paciente</h1>
+    </div>
+
+    <div class="col col-12">
+        <a class="btn btn-primary font-weight-bold float-left" style="margin-right:1%" asp-area="Clinics" asp-controller="PerfilPaciente" asp-action="Index" asp-route-id="@Model.Pacientes.Id">
+            <span class="fa fa-arrow-left"></span> Paciente
+        </a>
+        <form method="post" enctype="multipart/form-data" asp-controller="ImagenesEvolucionPaciente" asp-action="CargarImagenesPaciente" asp-route-idPaciente=@Model.Pacientes.Id>
+            <span>Selecciona un archivo:</span>
+            <input type="file" name="postedFiles" accept="image/jpeg" />
+            <input type="submit" value="Cargar" />
+        </form>
+    </div>
+    <br />
+
+    <div class="col col-12">
+        <table class="table table-responsive">
+            @{
+                var numero = 1;
+
+                @for (int i = 0; i < (Model.ImageList.Count / 3); i++)
+                {
+                    <tr>
+                        @for (int e = i * 3; e < numero * 3; e++)
+                        {
+                            <td>
+                                @{
+                                    <img class="float-left p-2" src='@Url.Action("ObtenerImagenesPaciente", "ImagenesEvolucionPaciente", new { id = @Model.Pacientes.Id, nameImage = @Model.ImageList[e]})'
+                                         alt="Evolucion Paciente" width="300" height="300" />
+                                    <a type="button" class="btn btn-danger" asp-controller="ImagenesEvolucionPaciente" asp-action="EliminarImagenPaciente" asp-route-nombreImagen=@Model.ImageList[e] asp-route-idPaciente=@Model.Pacientes.Id>
+                                        Eliminar
+                                    </a>
+                                }
+                            </td>
+                        }
+                    </tr>
+                    numero = numero + 1;
+                }
+            }
+
+            @if (Model.ImageList.Count % 3 == 1)
+            {
+                <tr>
+                    <td>
+                        @{
+                            <img class="float-left p-2" src='@Url.Action("ObtenerImagenesPaciente", "ImagenesEvolucionPaciente", new { id = @Model.Pacientes.Id, nameImage = @Model.ImageList[Model.ImageList.Count - 1]})' 
+                                 alt="Evolucion Paciente" width="300" height="300" />
+                            <a type="button" class="btn btn-danger" asp-controller="ImagenesEvolucionPaciente" asp-action="EliminarImagenPaciente" asp-route-nombreImagen=@Model.ImageList[Model.ImageList.Count-1] asp-route-idPaciente=@Model.Pacientes.Id>
+                                Eliminar
+                            </a>
+                        }
+                    </td>
+                </tr>
+            }
+            @if (Model.ImageList.Count % 3 == 2)
+            {
+                <tr>
+                    <td>
+                        @{
+                            <img class="float-left p-2" src='@Url.Action("ObtenerImagenesPaciente", "ImagenesEvolucionPaciente", new { id = @Model.Pacientes.Id, nameImage = @Model.ImageList[Model.ImageList.Count - 1]})' alt="Evolucion Paciente" width="300" height="300" />
+                            <a type="button" class="btn btn-danger" asp-controller="ImagenesEvolucionPaciente" asp-action="EliminarImagenPaciente" asp-route-nombreImagen=@Model.ImageList[Model.ImageList.Count-1] asp-route-idPaciente=@Model.Pacientes.Id>
+                                Eliminar
+                            </a>
+                        }
+                    </td>
+                    <td>
+                        @{
+                            <img class="float-left p-2" src='@Url.Action("ObtenerImagenesPaciente", "ImagenesEvolucionPaciente", new { id = @Model.Pacientes.Id, nameImage = @Model.ImageList[Model.ImageList.Count - 2]})' alt="Evolucion Paciente" width="300" height="300" />
+                            <a type="button" class="btn btn-danger" asp-controller="ImagenesEvolucionPaciente" asp-action="EliminarImagenPaciente" asp-route-nombreImagen=@Model.ImageList[Model.ImageList.Count-2] asp-route-idPaciente=@Model.Pacientes.Id>
+                                Eliminar
+                            </a>
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

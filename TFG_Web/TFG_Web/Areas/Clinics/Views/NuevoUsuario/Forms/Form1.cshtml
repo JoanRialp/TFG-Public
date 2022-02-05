@@ -1,0 +1,554 @@
+﻿@*Form1*@
+
+<div class="tab-pane fade show active" id="form1" role="tabpanel" aria-labelledby="navPagina1FormUsuario">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <label for="example-date-input" class="col-12 col-form-label">
+                    Nombre/s <a style="color:red"> * </a>
+                </label>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    @{
+                        try
+                        {
+                            @if (@Model.Pacientes.Id != null)
+                            {
+                                <input id="form1NuevoPacienteNombre" class="form-control" type="text" value="@Model.Pacientes.P_Nombre" placeholder="Nombre" name="NuevoUsuarioForm1Nombre">
+                            }
+                            else
+                            {
+                                <input id="form1NuevoPacienteNombre" class="form-control" type="text" placeholder="Nombre" name="NuevoUsuarioForm1Nombre">
+                            }
+                        }
+                        catch
+                        {
+                            <input id="form1NuevoPacienteNombre" class="form-control" type="text" placeholder="Nombre" name="NuevoUsuarioForm1Nombre">
+                        }
+                    }
+
+                </div>
+                <div id="form1NuevoPacienteNombreInvalid" class="text-danger col-12" style="visibility: hidden">
+                    Indica un valor para Nombre/s
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <label for="example-text-input" class="col-12 col-form-label">
+                    Apellido/s <a style="color:red"> * </a>
+                </label>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    @{
+                        try
+                        {
+                            @if (@Model.Pacientes.Id != null)
+                            {
+                                <input id="form1NuevoPacienteApellidos" class="form-control" value="@Model.Pacientes.P_Apellidos" type="text" placeholder="Apellidos" name="NuevoUsuarioForm1Apellidos">
+                            }
+                            else
+                            {
+                                <input id="form1NuevoPacienteApellidos" class="form-control" type="text" placeholder="Apellidos" name="NuevoUsuarioForm1Apellidos">
+                            }
+                        }
+                        catch
+                        {
+                            <input id="form1NuevoPacienteApellidos" class="form-control" type="text" placeholder="Apellidos" name="NuevoUsuarioForm1Apellidos">
+                        }
+                    }
+                </div>
+                <div id="form1NuevoPacienteApellidosInvalid" class="text-danger col-12" style="visibility: hidden">
+                    Indica un valor Apellido/s
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <label for="example-text-input" class="col-12 col-form-label">
+                    Correo electrónico <a style="color:red"> * </a>
+                </label>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    @{
+                        try
+                        {
+                            @if (@Model.Pacientes.Id != null)
+                            {
+                                <input id="form1NuevoPacienteCorreo" class="form-control" value="@Model.Pacientes.P_Correo" type="email" placeholder="Correo electrónico" name="NuevoUsuarioForm1Correo">
+                            }
+                            else
+                            {
+                                <input id="form1NuevoPacienteCorreo" class="form-control" type="email" placeholder="Correo electrónico" name="NuevoUsuarioForm1Correo">
+                            }
+                        }
+                        catch
+                        {
+                            <input id="form1NuevoPacienteCorreo" class="form-control" type="email" placeholder="Correo electrónico" name="NuevoUsuarioForm1Correo">
+                        }
+                    }
+                </div>
+                <div id="form1NuevoPacienteCorreoInvalid" class="text-danger col-12" style="visibility: hidden">
+                    Indica un valor Correo electrónico
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <label for="example-date-input" class="col-12 col-form-label">
+                    Fecha de 1ra Consulta
+                </label>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <input class="form-control" type="date" placeholder="dd/mm/aaaa" name="NuevoUsuarioForm1Fecha">
+                </div>
+                <div id="ControlForm1FechaInvalid" class="text-danger col-12" style="visibility: hidden">
+                    Indica un valor para  Fecha de 1ra Consulta
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <label for="example-text-input" class="col-12 col-form-label">
+                    Edad (Fecha de nacimiento)
+                </label>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <input class="form-control" type="date" placeholder="Tu respuesta" name="NuevoUsuarioForm1Edad">
+                </div>
+                <div id="ControlForm1HorasDiaInvalid" class="text-danger col-12" style="visibility: hidden">
+                    Indica un valor Edad
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <label for="example-text-input" class="col-12 col-form-label">
+                    Género
+                </label>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div id="ControlForm2GroupF1" class="btn-group-toggle pl-3">
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="customRadioFormNuevoUsuarioGenero1" name="customRadioFormNuevoUsuarioGenero" value="Mujer" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioFormNuevoUsuarioGenero1">Mujer</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="customRadioFormNuevoUsuarioGenero2" name="customRadioFormNuevoUsuarioGenero" value="Hombre" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioFormNuevoUsuarioGenero2">Hombre</label>
+                    </div>
+                </div>
+                <div id="ControlForm2GroupF1Invalid" class="text-danger col-12" style="visibility: hidden">
+                    Indica un valor para Género
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <label for="example-text-input" class="col-12 col-form-label">
+                    Motivo de Consulta
+                </label>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div id="NuevoUsuarioForm9Pectus" class="btn-group-toggle pl-3">
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="customRadioForm9NuevoUsuarioPectus1" value="Pectus Carinatum" name="customRadioForm9NuevoUsuarioPectus" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioForm9NuevoUsuarioPectus1">Pectus Carinatum</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="customRadioForm9NuevoUsuarioPectus2" value="Pectus Excavatum" name="customRadioForm9NuevoUsuarioPectus" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioForm9NuevoUsuarioPectus2">Pectus Excavatum</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="customRadioForm9NuevoUsuarioPectus3" value="Pectus Mixto" name="customRadioForm9NuevoUsuarioPectus" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioForm9NuevoUsuarioPectus3">Pectus Mixto</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="customRadioForm9NuevoUsuarioPectus4" value="Sindrome Poland" name="customRadioForm9NuevoUsuarioPectus" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioForm9NuevoUsuarioPectus4">Síndrome de Poland</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="customRadioForm9NuevoUsuarioPectus5" value="Other:" name="customRadioForm9NuevoUsuarioPectus" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioForm9NuevoUsuarioPectus5">Other:</label>
+                    </div>
+                </div>
+                <input id="customRadioForm9NuevoUsuarioPectus5Input" class="form-control" type="text" placeholder="Other:" disabled="disabled" name="">
+                <div id="NuevoUsuarioForm9PectusInvalid" class="text-danger col-12" style="visibility: hidden">
+                    Indica un valor
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <label for="example-date-input" class="col-12 col-form-label">
+                    A qué edad notaron la deformidad torácica?
+                </label>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <input id="ControlForm1Fecha" class="form-control" type="text" placeholder="Tu respuesta" name="NuevoUsuarioForm1EdadNotaron">
+                </div>
+                <div id="ControlForm1FechaInvalid" class="text-danger col-12" style="visibility: hidden">
+                    Indica un valor para la pregunta
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <label for="example-text-input" class="col-12 col-form-label">
+                    Ha empeorado últimamente?
+                </label>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div id="ControlForm2GroupF1" class="btn-group-toggle pl-3">
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="customRadioFormNuevoUsuarioEmpeorado1" name="customRadioFormNuevoUsuarioEmpeorado" value="Si" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioFormNuevoUsuarioEmpeorado1">Si</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="customRadioFormNuevoUsuarioEmpeorado2" name="customRadioFormNuevoUsuarioEmpeorado" value="No" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioFormNuevoUsuarioEmpeorado2">No</label>
+                    </div>
+                </div>
+                <div id="ControlForm2GroupF1Invalid" class="text-danger col-12" style="visibility: hidden">
+                    Indica un valor
+                </div>
+            </div>
+        </div>
+        <div id="inputEmpeoradoUltimamenteForm1Cuando" hidden="hidden">
+            <div class="card-header">
+                <div class="row">
+                    <label for="example-date-input" class="col-12 col-form-label">
+                        Cuándo?
+                    </label>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <input id="ControlForm1Fecha" class="form-control" type="text" placeholder="Tu respuesta" name="NuevoUsuarioForm1Cuando">
+                    </div>
+                    <div id="ControlForm1FechaInvalid" class="text-danger col-12" style="visibility: hidden">
+                        Indica un valor para la pregunta
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <label for="example-text-input" class="col-12 col-form-label">
+                    Tiene hermano/a gemelo/a?
+                </label>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div id="ControlForm2GroupF1" class="btn-group-toggle pl-3">
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="customRadioFormNuevoUsuarioHermanos1" name="customRadioFormNuevoUsuarioHermanos" value="Si" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioFormNuevoUsuarioHermanos1">Si</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="customRadioFormNuevoUsuarioHermanos2" name="customRadioFormNuevoUsuarioHermanos" value="No" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioFormNuevoUsuarioHermanos2">No</label>
+                    </div>
+                </div>
+                <div id="ControlForm2GroupF1Invalid" class="text-danger col-12" style="visibility: hidden">
+                    Indica un valor
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <label for="example-text-input" class="col-12 col-form-label">
+                    Antecedentes de malformaciones en la familia.
+                </label>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div id="ControlForm1AntMalforFam" class="btn-group-toggle pl-3">
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="customRadioFormNuevoUsuarioAntMalforFam1" name="customRadioFormNuevoUsuarioAntMalforFam" value="Si" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioFormNuevoUsuarioAntMalforFam1">Si</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="customRadioFormNuevoUsuarioAntMalforFam2" name="customRadioFormNuevoUsuarioAntMalforFam" value="No" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioFormNuevoUsuarioAntMalforFam2">No</label>
+                    </div>
+                </div>
+                <div id="form1NuevoUsuarioAntecedentesMalformacionesFamilia" hidden="hidden" class="table-responsive table-wrapper-scroll">
+                    <table class="table table-striped text-center">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Madre</th>
+                                <th>Padre</th>
+                                <th>Hermano/a</th>
+                                <th>Ninguno</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>
+                                    Pectus Carinatum
+                                </th>
+                                <td>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input checkbox-xl" id="tableMaterialCheck2" value="Madre" name="checkboxForm1NuevoUsuarioAntecedentesCarinatum">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input  checkbox-xl" id="tableMaterialCheck2" value="Padre" name="checkboxForm1NuevoUsuarioAntecedentesCarinatum">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input checkbox-xl" id="tableMaterialCheck2" value="Hermano" name="checkboxForm1NuevoUsuarioAntecedentesCarinatum">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input checkbox-xl" id="tableMaterialCheck2" value="Ninguno" name="checkboxForm1NuevoUsuarioAntecedentesCarinatum">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Pectus Excavatum
+                                </th>
+                                <td>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input checkbox-xl" id="tableMaterialCheck2" value="Madre" name="checkboxForm1NuevoUsuarioAntecedentesExcavatum">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input checkbox-xl" id="tableMaterialCheck2" value="Padre" name="checkboxForm1NuevoUsuarioAntecedentesExcavatum">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input checkbox-xl" id="tableMaterialCheck2" value="Hermano" name="checkboxForm1NuevoUsuarioAntecedentesExcavatum">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input checkbox-xl" id="tableMaterialCheck2" value="Ninguno" name="checkboxForm1NuevoUsuarioAntecedentesExcavatum">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Otras Malformaciones
+                                </th>
+                                <td>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input checkbox-xl" id="tableMaterialCheck2" value="Madre" name="checkboxForm1NuevoUsuarioAntecedentesOtras">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input checkbox-xl" id="tableMaterialCheck2" value="Padre" name="checkboxForm1NuevoUsuarioAntecedentesOtras">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input checkbox-xl" id="tableMaterialCheck2" value="Hermano" name="checkboxForm1NuevoUsuarioAntecedentesOtras">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input checkbox-xl" id="tableMaterialCheck2" value="Ninguno" name="checkboxForm1NuevoUsuarioAntecedentesOtras">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Escoliosis que requirió tratamiento
+                                </th>
+                                <td>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input checkbox-xl" id="tableMaterialCheck2" value="Madre" name="checkboxForm1NuevoUsuarioAntecedentesEscoliosis">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input checkbox-xl" id="tableMaterialCheck2" value="Padre" name="checkboxForm1NuevoUsuarioAntecedentesEscoliosis">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input checkbox-xl" id="tableMaterialCheck2" value="Hermano" name="checkboxForm1NuevoUsuarioAntecedentesEscoliosis">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input checkbox-xl" id="tableMaterialCheck2" value="Ninguno" name="checkboxForm1NuevoUsuarioAntecedentesEscoliosis">
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="ControlForm2GroupF1Invalid" class="text-danger col-12" style="visibility: hidden">
+                    Indica un valor
+                </div>
+            </div>
+        </div>
+        <div id="form1NuevoUsuarioAntecedentesMalformacionesFamiliaOtros" hidden="hidden">
+            <div class="card-header">
+                <div class="row">
+                    <label for="example-date-input" class="col-12 col-form-label">
+                        <span class="fa fa-level-down-alt"></span>
+                        Otros familiares con malformaciones/Quién?/ Cuál?
+                    </label>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <input id="ControlForm1Fecha" class="form-control" type="text" placeholder="Tu respuesta" name="NuevoUsuarioForm1OtrosFamiliares">
+                    </div>
+                    <div id="ControlForm1FechaInvalid" class="text-danger col-12" style="visibility: hidden">
+                        Indica un valor para la pregunta
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <label for="example-text-input" class="col-12 col-form-label">
+                    Ha consultado anteriormente por su pectus?
+                </label>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div id="ControlForm2GroupF1" class="btn-group-toggle pl-3">
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="customRadioFormNuevoUsuarioConsultado1" value="Si" name="customRadioForm1NuevoUsuarioConsultado" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioFormNuevoUsuarioConsultado1">Si</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="customRadioFormNuevoUsuarioConsultado2" value="No" name="customRadioForm1NuevoUsuarioConsultado" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioFormNuevoUsuarioConsultado2">No</label>
+                    </div>
+                </div>
+                <div id="ControlForm2GroupF1Invalid" class="text-danger col-12" style="visibility: hidden">
+                    Indica un valor
+                </div>
+            </div>
+        </div>
+        <div id="form1NuevoUsuarioConsultadoPectusCuando" hidden="hidden">
+            <div class="card-header">
+                <div class="row">
+                    <label for="example-date-input" class="col-12 col-form-label">
+                        <span class="fa fa-level-down-alt"></span>
+                        Cuando?
+                    </label>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <input id="ControlForm1ConsultadoPectusCuando" class="form-control" type="text" placeholder="Tu respuesta" name="inputForm1NuevoUsuarioConsultadoCuando">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="form1NuevoUsuarioConsultadoPectusDonde" hidden="hidden">
+            <div class="card-header">
+                <div class="row">
+                    <label for="example-date-input" class="col-12 col-form-label">
+                        <span class="fa fa-level-down-alt"></span>
+                        Donde?
+                    </label>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <input id="ControlForm1ConsultadoPectusDonde" class="form-control" type="text" placeholder="Tu respuesta" name="inputForm1NuevoUsuarioConsultadoDonde">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <label for="example-text-input" class="col-12 col-form-label">
+                    Cirugía Previa
+                </label>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div id="NuevoUsuarioForm1Cirugia" class="btn-group-toggle pl-3">
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="customRadioFormNuevoUsuarioCirugia1" value="Si" name="customRadioForm1NuevoUsuarioCirugia" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioFormNuevoUsuarioCirugia1">Si</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="customRadioFormNuevoUsuarioCirugia2" value="No" name="customRadioForm1NuevoUsuarioCirugia" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioFormNuevoUsuarioCirugia2">No</label>
+                    </div>
+                </div>
+                <div id="NuevoUsuarioForm1CirugiaInvalid" class="text-danger col-12" style="visibility: hidden">
+                    Indica un valor
+                </div>
+            </div>
+        </div>
+        <partial name="Form2.cshtml" />
+    </div>
+    <div class="col-3 pt-2 pb-2">
+        <button id="BtnNextForm1Usuario" class="btn btn-primary" type="button"> Siguiente </button>
+    </div>
+</div>

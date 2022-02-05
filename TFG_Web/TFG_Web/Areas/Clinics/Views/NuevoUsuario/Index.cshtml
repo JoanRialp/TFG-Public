@@ -1,0 +1,102 @@
+﻿@model ViewModel
+@{
+    ViewData["Title"] = "Nuevo Usuario";
+}
+
+<div class="d-flex justify-content-center flex-column">
+    <div class="jumbotron text-center">
+        <h1> Historia Clínica </h1>
+        <h2> Consultorio de Malformaciones de la Pared Torácica </h2>
+    </div>
+
+    <button onclick="topFunction()" id="btnSubirFormNuevoUsuario" class=" btn btn-danger position-fixed fixed-bottom" style="display:none;" title="Subir página">Subir</button>
+
+    @if (Model.NotificacionesControl)
+    {
+        @if (Model.Notificaciones)
+        {
+            <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading">@Model.NotificacionesPaciente</h4>
+                <p>@Model.NotificacionesMensaje</p>
+            </div>
+        }
+
+        @if (!Model.Notificaciones)
+        {
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading">@Model.NotificacionesPaciente</h4>
+                <p>@Model.NotificacionesMensaje</p>
+            </div>
+        }
+    }
+
+    @*Nav Paginas*@
+    <ul class="nav nav-pills mb-3" role="tablist" style="background-color: #e3f2fd;">
+        <li class="nav-item">
+            <a class="nav-link active" id="navPagina1FormUsuario" data-toggle="pill" href="#form1" role="tab" aria-controls="form1" aria-selected="true">Datos Generales</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="navPagina3FormUsuario" data-toggle="pill" href="#form3" role="tab" aria-controls="form3" aria-selected="false">Anamnesis</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="navPagina9FormUsuario" data-toggle="pill" href="#form9" role="tab" aria-controls="form9" aria-selected="false">Signos y síntomas clínicos</a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="dropdownListPectus" href="" data-toggle="dropdown" aria-selected="false" aria-haspopup="true" aria-expanded="false">Tipo Pectus</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a id="dropdownPectusCarinatum" class="dropdown-item disabled" data-toggle="pill" href="#form11" role="tab" aria-controls="form11" aria-selected="false">Pectus Carinatum</a>
+                <a id="dropdownPectusExcavatum" class="dropdown-item  disabled" data-toggle="pill" href="#form12" role="tab" aria-controls="form12" aria-selected="false">Pectus Excavatum</a>
+                <a id="dropdownPectusMixto" class="dropdown-item disabled" data-toggle="pill" href="#form13" role="tab" aria-controls="form13" aria-selected="false">Pectus Mixto</a>
+                <a id="dropdownSindromePoland" class="dropdown-item disabled" data-toggle="pill" href="#form14" role="tab" aria-controls="form14" aria-selected="false">Síndrome de Poland</a>
+                <a id="dropdownOtros" class="dropdown-item disabled" data-toggle="pill" href="#form13" role="tab" aria-controls="form13" aria-selected="false">Otro</a>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="navPagina10FormUsuario" data-toggle="pill" href="#form10" role="tab" aria-controls="form10" aria-selected="false">Datos físicos</a>
+        </li>
+    </ul>
+
+    <br />
+
+    @*Formulario Nuevo Usuario*@
+    <form id="formGeneralNuevoUsuarioIndex" asp-area="Clinics" asp-controller="NuevoUsuario" asp-action="AddFormularioNuevoUsuario" method="post" asp-antiforgery="true">
+        <div class="tab-content">
+            @if (Model.Pacientes != null)
+            {
+                <h5>@Model.Pacientes.P_Nombre @Model.Pacientes.P_Apellidos</h5>
+                <input type="text" value="@Model.Pacientes.Id" hidden="hidden" name="id_pacienteNuevoUsuarioForm">
+            }
+            <partial name="Forms/Form1.cshtml" />
+            <partial name="Forms/Form3.cshtml" />
+            <partial name="Forms/Form9.cshtml" />
+            <partial name="Forms/Form10.cshtml" />
+            <partial name="Forms/Form11.cshtml" />
+            <partial name="Forms/Form12.cshtml" />
+            <partial name="Forms/Form13.cshtml" />
+            <partial name="Forms/Form14.cshtml" />
+        </div>
+    </form>
+
+    <div class="modal fade" role="dialog" id="formNuevoUsuarioModalEnviar">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content text-center">
+                <div class="modal-header">
+                    <p class="font-weight-bold">Nuevo Usuario - Historia Clínica</p>
+                    <button type="button" class="btn btn-danger" id="buttonPopupCerrarFormNuevoUsuario"> <span class="fa fa-window-close"></span> </button>
+                </div>
+                <div class="modal-body">
+                    <p>Enviar Formulario?</p>
+                    <div id="error_ModalSubmitFormNuevoUsuario" hidden="hidden">
+                        <p style="color:red">Rellena los campos obligatorios</p>
+                    </div>
+                    <div id="spinner_ModalSubmitFormNuevoUsuario" hidden="hidden" class="spinner-border" role="status">
+                        <span class="sr-only"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="popupConfirmarFormNuevoUsuario" type="button" class="btn btn-success ui-scroll-popup font-weight-bold float-right"> Enviar <span class="fa fa-paper-plane"></span> </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

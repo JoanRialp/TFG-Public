@@ -1,0 +1,51 @@
+﻿@using Microsoft.AspNetCore.Http
+@model ViewModel
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ppt-huav</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/bootstrap.css">
+    <link href="~/font-awesome/css/all.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/sidebarPartially.css" />
+    <link rel="stylesheet" href="~/css/navBarPartially.css" />
+
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <partial name="../PartialViews/Sidebar.cshtml" />
+
+        <!-- Page Content  -->
+        <div id="content">
+            <partial name="../PartialViews/Navbar.cshtml" />
+
+            <div id="navbarGeneral">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/font-awesome/js/all.js"></script>
+    <script src="~/Chart.js/Chart.js"></script>
+    <script src="~/js/siteEstadistica.js"></script>
+    <script src="~/js/siteClinics.js"></script>
+
+    @*Control de navegacion para el Admin*@
+    @{ var area = Context.Session.GetInt32("usrArea");
+        if (area == 0)
+        {
+            <script type="text/javascript">
+                document.getElementById("botonAñadirUsuario").style.display = "block";
+            </script>
+        }
+    }
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

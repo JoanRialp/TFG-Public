@@ -1,0 +1,44 @@
+﻿<div class="modal fade" role="dialog" id="modalFinalizarTratamiento">
+    <div class="modal-dialog modal-lg" role="document">
+        @if (Model.HistorialClinico2 != null)
+        {
+            <div class="modal-content text-center">
+                <form asp-area="Clinics" asp-controller="PacienteFinalizado" asp-action="FinalizarTratamientoPaciente" asp-route-id="@Model.Pacientes.Id" asp-route-finalizar=true asp-route-idHistorialClinico=@Model.HistorialClinico.Id asp-route-idHistorialClinico2=@Model.HistorialClinico.Id method="post" asp-antiforgery="true">
+                    <div class="modal-header">
+                        <p class="font-weight-bold">Finalizar Tratamiento - Historial</p>
+                        <button type="button" class="btn btn-danger" id="buttonPopupCerrarFinalizarTratamiento"> <span class="fa fa-window-close"></span> </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>¿Estas seguro/a de finalizar el tratamiento?</p>
+                        <div id="spinner_ModalSubmitFormNuevoUsuario" hidden="hidden" class="spinner-border" role="status">
+                            <span class="sr-only"></span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="" type="submit" class="btn btn-success ui-scroll-popup font-weight-bold float-right"> Si </button>
+                    </div>
+                </form>
+            </div>
+        }
+        else
+        {
+            <div class="modal-content text-center">
+                <form asp-area="Clinics" asp-controller="PacienteFinalizado" asp-action="FinalizarTratamientoPaciente" asp-route-id="@Model.Pacientes.Id" asp-route-finalizar=true asp-route-idHistorialClinico=@Model.HistorialClinico.Id method="post" asp-antiforgery="true">
+                    <div class="modal-header">
+                        <p class="font-weight-bold">Finalizar Tratamiento - Historial</p>
+                        <button type="button" class="btn btn-danger" id="buttonPopupCerrarFinalizarTratamiento"> <span class="fa fa-window-close"></span> </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>¿Estas seguro/a de finalizar el tratamiento?</p>
+                        <div id="spinner_ModalSubmitFormNuevoUsuario" hidden="hidden" class="spinner-border" role="status">
+                            <span class="sr-only"></span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="" type="submit" class="btn btn-success ui-scroll-popup font-weight-bold float-right"> Si </button>
+                    </div>
+                </form>
+            </div>
+        }
+    </div>
+</div>

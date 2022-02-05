@@ -1,0 +1,128 @@
+﻿<div class="tab-pane fade show active" id="form1" role="tabpanel" aria-labelledby="navPagina1FormPacienteUsuario">
+    <div class="tab-pane" id="home">
+        <form asp-area="Clinics" asp-controller="PerfilPaciente" asp-action="form1PerfilPacientesGuardarInputs" method="post" asp-antiforgery="true">
+            <input type="text" class="form-control" hidden="hidden" name="form1PerfilPacienteId" value="@Model.HistorialClinico.Id">
+            <input type="text" class="form-control" hidden="hidden" name="idPaciente" value="@Model.Pacientes.Id">
+            <hr>
+
+            <div id="form1PerfilPacienteInputs">
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label for="first_name"><h5>Nombre</h5></label>
+                        <input type="text" class="form-control" disabled name="form1PerfilPacienteNombre" placeholder="Vacio" value="@Model.HistorialClinico.HC_Nombre">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label for="last_name"><h5>Apellidos</h5></label>
+                        <input type="text" class="form-control" disabled name="form1PerfilPacienteApellido" placeholder="Vacio" value="@Model.HistorialClinico.HC_Apellidos">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label for="phone"><h5>Fecha Primera Consulta</h5></label>
+                        <input type="date" class="form-control" disabled name="form1PerfilPacienteFechaPrimeraConsulta" placeholder="Vacio" value="@Model.HistorialClinico.HC_FechaPrimeraConsulta.ToString("yyyy-MM-dd")">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label for="mobile"><h5>Edad</h5></label>
+                        <input type="number" class="form-control edadPacienteNumber" disabled placeholder="Vacio" value="@Model.HistorialClinico.HC_Edad.ToString("yyyy-MM-dd")">
+                        <input type="date" class="form-control edadPacienteDate" disabled hidden="hidden" name="form1PerfilPacienteEdad" placeholder="Vacio" value="@Model.HistorialClinico.HC_Edad.ToString("yyyy-MM-dd")">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label for="HC_Genero"><h5>Genero</h5></label>
+                        <input type="text" class="form-control" disabled name="form1PerfilPacienteGenero" placeholder="Vacio" value="@Model.HistorialClinico.HC_Genero">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label for="HC_MotivoConsulta"><h5>Motivo Consulta</h5></label>
+                        <input type="text" class="form-control" disabled name="form1PerfilPacienteMotivoConsulta" placeholder="Vacio" value="@Model.HistorialClinico.HC_MotivoConsulta">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label for="HC_EdadNotaronDeformidadToracica"><h5>Edad notaron deformidad toracica</h5></label>
+                        <input type="text" class="form-control" disabled name="form1PerfilPacienteNotaronDeformidad" placeholder="Vacio" value="@Model.HistorialClinico.HC_EdadNotaronDeformidadToracica">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label for="HC_EmpeoradoUltimamente"><h5>A empeorado ultimamente</h5></label>
+                        <input type="text" class="form-control" disabled name="form1PerfilPacienteEmpeorado" placeholder="Vacio" value="@Model.HistorialClinico.HC_EmpeoradoUltimamente">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label for="HC_Cuando"><h5>Cuando</h5></label>
+                        <input type="text" class="form-control" disabled name="form1PerfilPacienteCuando" placeholder="Vacio" value="@Model.HistorialClinico.HC_Cuando">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label for="HC_HermanosGemelos"><h5>Hermanos gemelos</h5></label>
+                        <input type="text" class="form-control" disabled name="form1PerfilPacienteHermanosGemelos" placeholder="Vacio" value="@Model.HistorialClinico.HC_HermanosGemelos">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label for="HC_AntecendentesFamilia"><h5>Antecendentes familia</h5> *Madre, Padre, Hermano, Ninguno</label>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Pectus Carinatum
+                                    </th>
+                                    <th>
+                                        Pectus Excavatum
+                                    </th>
+                                    <th>
+                                        Otras Malformaciones
+                                    </th>
+                                    <th>
+                                        Escoliosis que requirió tratamiento
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < 4; i++)
+                                {
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="form-control" disabled style="color: black;" name="form1PerfilPacienteAntecedentesFamilia1" placeholder="Vacio" value="@Model.HistorialClinico.HC_AntecendentesFamilia[0, i]">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" disabled style="color: black;" name="form1PerfilPacienteAntecedentesFamilia2" placeholder="Vacio" value="@Model.HistorialClinico.HC_AntecendentesFamilia[1, i]">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" disabled style="color: black;" name="form1PerfilPacienteAntecedentesFamilia3" placeholder="Vacio" value="@Model.HistorialClinico.HC_AntecendentesFamilia[2, i]">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" disabled style="color: black;" name="form1PerfilPacienteAntecedentesFamilia4" placeholder="Vacio" value="@Model.HistorialClinico.HC_AntecendentesFamilia[3, i]">
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label for="HC_OtrosFamiliares"><h5>Otros familiares</h5></label>
+                        <input type="text" class="form-control" disabled name="form1PerfilPacienteOtrosFamiliares" placeholder="Vacio" value="@Model.HistorialClinico.HC_OtrosFamiliares">
+                    </div>
+                </div>
+            </div>
+            <div id="buttonsSubmitForm1SistemaCompresorEditar" hidden="hidden" class="form-group">
+                <div class="col-xs-12">
+                    <br>
+                    <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Guardar</button>
+                    <button id="buttonForm1SistemaCompresorEditarHidden" class="btn btn-lg btn-danger" type="button"><span class="fa fa-window-close"></span></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+﻿#navBarContainer input {
+    visibility:visible;
+}
+
+#navBarContainer #listado_Pacientes {
+    visibility: visible;
+}
+
+#navBarContainer #desplegable_Pacientes {
+    visibility: visible;
+}
+
+/* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+@media (max-width: 768px) {
+    /* Shrinking the sidebar from 250px to 80px and center aligining its content*/
+
+    #navBarContainer input {
+        
+    }
+
+    #navBarContainer #listado_Pacientes {
+    }
+
+    #navBarContainer #desplegable_Pacientes {
+    }
+
+    #navBarContainer #search-button {
+        
+    }
+}

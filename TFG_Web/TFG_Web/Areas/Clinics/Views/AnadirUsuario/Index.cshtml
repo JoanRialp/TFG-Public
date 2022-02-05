@@ -1,0 +1,77 @@
+﻿@{
+    ViewData["Title"] = "Añadir Usuario";
+}
+
+<div class="d-flex justify-content-center flex-column">
+    <div class="jumbotron text-center">
+        <h1>Añadir Usuario</h1>
+    </div>
+
+    <form id="needs-validation" asp-area="Clinics" asp-controller="AnadirUsuario" asp-action="formularioAddUsuario" method="post" asp-antiforgery="true">
+        <div class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <label for="example-text-input" class="col-12 col-form-label">
+                            Correo
+                        </label>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <input class="form-control" type="email" placeholder="xxxx@example.com" autocomplete="off" name="AñadirUsuarioFormCorreo">
+                        </div>
+                        <div id="ControlForm1HorasDiaInvalid" class="text-danger col-12" style="visibility: hidden">
+                            Indica un valor Correo
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <label for="example-text-input" class="col-12 col-form-label">
+                            Contraseña
+                        </label>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <input type="password" class="form-control" autocomplete="off" placeholder="Contraseña" name="AñadirUsuarioFormContraseña">
+                        </div>
+                        <div id="ControlForm1HorasDiaInvalid" class="text-danger col-12" style="visibility: hidden">
+                            Indica un valor Contraseña
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <label for="example-text-input" class="col-12 col-form-label">
+                            Grupo:
+                            1 - Clinics /
+                            2 - Pacientes
+                        </label>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <select id="UsuariosFormGrupo" class="form-control" type="number" name="AñadirUsuarioFormGrupo">
+                                <option>1</option>
+                                <option>2</option>
+                            </select>
+                        </div>
+                        <div id="ControlForm1HorasDiaInvalid" class="text-danger col-12" style="visibility: hidden">
+                            Indica un valor Grupo
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="submit" name="submit" class="btn btn-success" />
+    </form>
+</div>

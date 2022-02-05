@@ -1,0 +1,679 @@
+﻿@model ViewModel
+@{
+    ViewData["Title"] = "Formulario Control Sistemas Compresor";
+}
+
+<div class="d-flex justify-content-center flex-column">
+    <div class="jumbotron text-center">
+        <h1>Formulario</h1>
+        <h2>Control de Sistema Compresor</h2>
+    </div>
+
+    @if (Model.NotificacionesControl)
+    {
+        @if (Model.Notificaciones)
+        {
+            <div class="alert alert-success" role="alert">
+                <p>@Model.NotificacionesMensaje</p>
+            </div>
+        }
+
+        @if (Model.Notificaciones == false)
+        {
+            <div class="alert alert-danger" role="alert">
+                <p>@Model.NotificacionesMensaje</p>
+            </div>
+        }
+    }
+
+    @if (Model.id_Paciente == null)
+    {
+        <h5>
+            Selecciona un paciente:
+            <select id="SelectSistemaCompresorIdPaciente" class="form custom-select col-sm-2" aria-label="Selecciona un paciente">
+                <option selected disabled value="null">Selecciona un paciente...</option>
+                @foreach (var paciente in Model.ListPacientes)
+                {
+                    <option option value=@paciente.Id>@paciente.P_Nombre</option>
+                }
+            </select>
+        </h5>
+    }
+
+    @if (Model.id_Paciente != null)
+    {
+        <h4>Paciente: @Model.Pacientes.P_Nombre @Model.Pacientes.P_Apellidos </h4>
+    }
+
+    <div id="indicarPacienteError" hidden="hidden" class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Error</h4>
+        <p>Indica un paciente</p>
+    </div>
+    <div id="error_ModalSubmitFormSistemaCompresor" hidden="hidden" class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Error</h4>
+        <p>Rellena los campos obligatorios</p>
+    </div>
+
+    <ul class="nav nav-pills mb-3" role="tablist" style="background-color: #e3f2fd;">
+        <li class="nav-item">
+            <a class="nav-link active" id="navPagina1" data-toggle="pill" href="#form1" role="tab" aria-controls="form1" aria-selected="true">Página 1</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="navPagina2FormControl" data-toggle="pill" href="#form2" role="tab" aria-controls="form2" aria-selected="false">Página 2</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="navPagina3FormControl" data-toggle="pill" href="#form3" role="tab" aria-controls="form3" aria-selected="false">Página 3</a>
+        </li>
+    </ul>
+
+    <br />
+
+    <form id="needs-validation" asp-controller="FormControlSistemaCompresor" asp-action="AddFormularioControlSistemaCompresor" method="post" asp-antiforgery="true">
+        @if (Model.id_Paciente != null)
+        {
+            <input id="FormSistemaCompresorIdPaciente" type="text" hidden="hidden" name="SistemaCompresorIdPaciente" value="@Model.Pacientes.Id">
+        }
+        <input id="FormSistemaCompresorIdPaciente" type="text" hidden="hidden" name="SistemaCompresorIdPaciente" value="">
+
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="form1" role="tabpanel" aria-labelledby="navPagina1">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <label for="example-date-input" class="col-12 col-form-label">Fecha <a style="color:red"> * </a></label>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <input id="ControlSistemaCompresorForm1Fecha" class="form-control" type="date" placeholder="dd/mm/aaaa" name="SistemaCompresorForm1Fecha">
+                            </div>
+                            <div id="ControlSistemaCompresorForm1FechaInvalid" class="text-danger col-12" style="visibility: hidden">
+                                Indica un valor para Fecha
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <label for="example-text-input" class="col-12 col-form-label">
+                                Horas de uso día
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <input id="ControlForm1HorasDia" class="form-control" type="number" placeholder="Tu respuesta" name="SistemaCompresorForm1HorasDia">
+                            </div>
+                            <div id="ControlForm1HorasDiaInvalid" class="text-danger col-12" style="visibility: hidden">
+                                Indica un valor paraHoras de uso día
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <label for="example-text-input" class="col-12 col-form-label">
+                                Horas de uso noche
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <input id="ControlForm1HorasNoche" class="form-control" type="number" placeholder="Tu respuesta" name="SistemaCompresorForm1HorasNoche">
+                            </div>
+                            <div id="ControlForm1HorasNocheInvalid" class="text-danger col-12" style="visibility: hidden">
+                                Indica un valor para Horas de uso noche
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <label for="example-text-input" class="col-12 col-form-label">
+                                PC (PSI) <a style="color:red"> * </a>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-12">
+                            <input id="ControlSistemaCompresorForm1PC" class="form-control" type="text" placeholder="Tu respuesta" name="SistemaCompresorForm1PC">
+                        </div>
+                        <div id="ControlSistemaCompresorForm1PCInvalid" class="text-danger col-12" style="visibility: hidden">
+                            Indica un valor para PC (PSI)
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <label for="example-text-input" class="col-12 col-form-label">
+                                Grupo
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div id="ControlForm1GroupGrupo" class="btn-group-toggle pl-3">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioSistemaCompresorForm1Grupo1" name="customRadioSistemaCompresorForm1Grupo" value="1" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioSistemaCompresorForm1Grupo1">1-4 (Grupo 1)</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioSistemaCompresorForm1Grupo2" name="customRadioSistemaCompresorForm1Grupo" value="2" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioSistemaCompresorForm1Grupo2">4-6 (Grupo 2)</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioSistemaCompresorForm1Grupo3" name="customRadioSistemaCompresorForm1Grupo" value="3" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioSistemaCompresorForm1Grupo3">6-8 (Grupo 3)</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioSistemaCompresorForm1Grupo4" name="customRadioSistemaCompresorForm1Grupo" value="4" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioSistemaCompresorForm1Grupo4">>8 (Grupo 4)</label>
+                                </div>
+                            </div>
+                            <div id="ControlForm1GroupGrupoInvalid" class="text-danger col-12" style="visibility: hidden">
+                                Indica un valor para Grupo
+                            </div>
+                        </div>
+                        <div class="row align-self-end">
+                            <button id="clearControlForm1GroupGrup" class="btn btn-dark"> Limpiar seleccion</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <label for="example-text-input" class="col-12 col-form-label">
+                                PT Pre-ajuste
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <input id="ControlForm1PTPre" class="form-control" type="text" placeholder="Tu respuesta" name="SistemaCompresorForm1PTPre">
+                            </div>
+                            <div id="ControlForm1PTPreInvalid" class="text-danger col-12" style="visibility: hidden">
+                                Indica un valor para PT Pre-ajuste
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <label for="example-text-input" class="col-12 col-form-label">
+                                PT Post-ajuste
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <input id="ControlForm1PTPost" class="form-control" type="text" placeholder="Tu respuesta" name="SistemaCompresorForm1PTPost">
+                            </div>
+                            <div id="ControlForm1PTPostInvalid" class="text-danger col-12" style="visibility: hidden">
+                                Indica un valor para PT Post-ajuste
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <label for="example-text-input" class="col-12 col-form-label">
+                                Ajuste del Sistema Compresor Dinámico
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div id="ControlForm1GroupAjustes" class="btn-group-toggle pl-3">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioSistemaCompresorForm1AjustesDinamico1" value="Si" name="customRadioSistemaCompresorForm1AjustesDinamico" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioSistemaCompresorForm1AjustesDinamico1">Si</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioSistemaCompresorForm1AjustesDinamico2" value="No" name="customRadioSistemaCompresorForm1AjustesDinamico" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioSistemaCompresorForm1AjustesDinamico2">No</label>
+                                </div>
+                            </div>
+                            <div id="ControlForm1GroupAjustesInvalid" class="text-danger col-12" style="visibility: hidden">
+                                Indica un valor para Ajuste del Sistema Compresor Dinámico
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3 pt-2 pb-2">
+                    <button id="BtnNextForm1Control" class="btn btn-primary" type="button"> Siguiente </button>
+                </div>
+            </div>
+
+            @* From2 *@
+            <div class="tab-pane fade" id="form2" role="tabpanel" aria-labelledby="navPagina2FormControl">
+                <p>
+                    Ajuste del Sistema Compresor Dinámico
+                </p>
+                <p>
+                    Completar con: +n° de ptos. para agrandar ó -n° de ptos. para ajustar.
+                </p>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <label for="example-text-input" class="col-12 col-form-label">
+                                F1 (1/2)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div id="ControlForm2GroupF1" class="btn-group-toggle pl-3">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF11" value="Sin Modificar" name="customRadioForm2SistemaCompresorF1" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF11">Sin Modificar</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF12" value="+1" name="customRadioForm2SistemaCompresorF1" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF12">+1</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF13" value="+2" name="customRadioForm2SistemaCompresorF1" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF13">+2</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF14" value="+3" name="customRadioForm2SistemaCompresorF1" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF14">+3</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF15" value="-1" name="customRadioForm2SistemaCompresorF1" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF15">-1</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF16" value="-2" name="customRadioForm2SistemaCompresorF1" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF16">-2</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF17" value="-3" name="customRadioForm2SistemaCompresorF1" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF17">-3</label>
+                                </div>
+                            </div>
+                            <div id="ControlForm2GroupF1Invalid" class="text-danger col-12" style="visibility: hidden">
+                                Indica un valor para F1 (1/2)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <label for="example-text-input" class="col-12 col-form-label">
+                                F2 (2/3)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div id="ControlForm2GroupF2" class="btn-group-toggle pl-3">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF21" value="Sin Modificar" name="customRadioForm2SistemaCompresorF2" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF21">Sin Modificar</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF22" value="+1" name="customRadioForm2SistemaCompresorF2" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF22">+1</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF23" value="+2" name="customRadioForm2SistemaCompresorF2" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF23">+2</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF24" value="+3" name="customRadioForm2SistemaCompresorF2" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF24">+3</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF25" value="-1" name="customRadioForm2SistemaCompresorF2" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF25">-1</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF26" value="-2" name="customRadioForm2SistemaCompresorF2" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF26">-2</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF27" value="-3" name="customRadioForm2SistemaCompresorF2" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF27">-3</label>
+                                </div>
+                            </div>
+                            <div id="ControlForm2GroupF1Invalid" class="text-danger col-12" style="visibility: hidden">
+                                Indica un valor para F2 (2/3)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <label for="example-text-input" class="col-12 col-form-label">
+                                F3 (4/5)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div id="ControlForm2GroupF2" class="btn-group-toggle pl-3">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF31" value="Sin Modificar" name="customRadioForm2SistemaCompresorF3" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF31">Sin Modificar</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF32" value="+1" name="customRadioForm2SistemaCompresorF3" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF32">+1</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF33" value="+2" name="customRadioForm2SistemaCompresorF3" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF33">+2</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF34" value="+3" name="customRadioForm2SistemaCompresorF3" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF34">+3</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF35" value="-1" name="customRadioForm2SistemaCompresorF3" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF35">-1</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF36" value="-2" name="customRadioForm2SistemaCompresorF3" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF36">-2</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF37" value="-3" name="customRadioForm2SistemaCompresorF3" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF37">-3</label>
+                                </div>
+                            </div>
+                            <div id="ControlForm2GroupF1Invalid" class="text-danger col-12" style="visibility: hidden">
+                                Indica un valor para F3 (4/5)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <label for="example-text-input" class="col-12 col-form-label">
+                                F4 (5/6)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div id="ControlForm2GroupF2" class="btn-group-toggle pl-3">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF41" value="Sin Modificar" name="customRadioForm2SistemaCompresorF4" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF41">Sin Modificar</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF42" value="+1" name="customRadioForm2SistemaCompresorF4" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF42">+1</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF43" value="+2" name="customRadioForm2SistemaCompresorF4" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF43">+2</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF44" value="+3" name="customRadioForm2SistemaCompresorF4" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF44">+3</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF45" value="-1" name="customRadioForm2SistemaCompresorF4" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF45">-1</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF46" value="-2" name="customRadioForm2SistemaCompresorF4" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF46">-2</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF47" value="-3" name="customRadioForm2SistemaCompresorF4" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF47">-3</label>
+                                </div>
+                            </div>
+                            <div id="ControlForm2GroupF1Invalid" class="text-danger col-12" style="visibility: hidden">
+                                Indica un valor para F4 (5/6)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <label for="example-text-input" class="col-12 col-form-label">
+                                F5 (6)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div id="ControlForm2GroupF2" class="btn-group-toggle pl-3">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF51" value="Sin Modificar" name="customRadioForm2SistemaCompresorF5" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF51">Sin Modificar</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF52" value="+1" name="customRadioForm2SistemaCompresorF5" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF52">+1</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF53" value="+2" name="customRadioForm2SistemaCompresorF5" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF53">+2</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF54" value="+3" name="customRadioForm2SistemaCompresorF5" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF54">+3</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF55" value="-1" name="customRadioForm2SistemaCompresorF5" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF55">-1</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF56" value="" -2 name="customRadioForm2SistemaCompresorF5" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF56">-2</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorF57" value="-3<" name="customRadioForm2SistemaCompresorF5" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorF57">-3</label>
+                                </div>
+                            </div>
+                            <div id="ControlForm2GroupF1Invalid" class="text-danger col-12" style="visibility: hidden">
+                                Indica un valor para F5 (6)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <label for="example-text-input" class="col-12 col-form-label">
+                                Doblador
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div id="ControlForm2GroupDoblador" class="btn-group-toggle pl-3">
+                                <div class="custom-control custom-radio">
+                                    <input type="checkbox" id="customCheckboxForm2SistemaCompresorDoblador1" value="F1" name="customCheckboxForm2SistemaCompresorDoblador" class="custom-control-input">
+                                    <label class="custom-control-label" for="customCheckboxForm2SistemaCompresorDoblador1">F1</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="checkbox" id="customCheckboxForm2SistemaCompresorDoblador2" value="F2" name="customCheckboxForm2SistemaCompresorDoblador" class="custom-control-input">
+                                    <label class="custom-control-label" for="customCheckboxForm2SistemaCompresorDoblador2">F2</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="checkbox" id="customCheckboxForm2SistemaCompresorDoblador3" value="F3" name="customCheckboxForm2SistemaCompresorDoblador" class="custom-control-input">
+                                    <label class="custom-control-label" for="customCheckboxForm2SistemaCompresorDoblador3">F3</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="checkbox" id="customCheckboxForm2SistemaCompresorDoblador4" value="F4" name="customCheckboxForm2SistemaCompresorDoblador" class="custom-control-input">
+                                    <label class="custom-control-label" for="customCheckboxForm2SistemaCompresorDoblador4">F4</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="checkbox" id="customCheckboxForm2SistemaCompresorDoblador5" value="F5" name="customCheckboxForm2SistemaCompresorDoblador" class="custom-control-input">
+                                    <label class="custom-control-label" for="customCheckboxForm2SistemaCompresorDoblador5">F5</label>
+                                </div>
+                            </div>
+                            <div id="ControlForm2GroupDobladorInvalid" class="text-danger col-12" style="visibility: hidden">
+                                Indica un valor Doblador
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <label for="example-text-input" class="col-12 col-form-label">
+                                Recambio de Pieza
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div id="ControlForm2GroupRecambio" class="btn-group-toggle pl-3">
+                                <div class="custom-control custom-radio">
+                                    <input type="checkbox" id="customCheckboxForm2SistemaCompresorRecambio1" value="F1" name="customCheckboxForm2SistemaCompresorRecambio" class="custom-control-input">
+                                    <label class="custom-control-label" for="customCheckboxForm2SistemaCompresorRecambio1">F1</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="checkbox" id="customCheckboxForm2SistemaCompresorRecambio2" value="F2" name="customCheckboxForm2SistemaCompresorRecambio" class="custom-control-input">
+                                    <label class="custom-control-label" for="customCheckboxForm2SistemaCompresorRecambio2">F2</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="checkbox" id="customCheckboxForm2SistemaCompresorRecambio3" value="F3" name="customCheckboxForm2SistemaCompresorRecambio" class="custom-control-input">
+                                    <label class="custom-control-label" for="customCheckboxForm2SistemaCompresorRecambio3">F3</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="checkbox" id="customCheckboxForm2SistemaCompresorRecambio4" value="F4" name="customCheckboxForm2SistemaCompresorRecambio" class="custom-control-input">
+                                    <label class="custom-control-label" for="customCheckboxForm2SistemaCompresorRecambio4">F4</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="checkbox" id="customCheckboxForm2SistemaCompresorRecambio5" value="F5" name="customCheckboxForm2SistemaCompresorRecambio" class="custom-control-input">
+                                    <label class="custom-control-label" for="customCheckboxForm2SistemaCompresorRecambio5">F5</label>
+                                </div>
+                            </div>
+                            <div id="ControlForm2GroupRecambioInvalid" class="text-danger col-12" style="visibility: hidden">
+                                Indica un valor Recambio de Pieza
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <label for="example-text-input" class="col-12 col-form-label">
+                                PAD (+)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div id="ControlForm2GroupF2" class="btn-group-toggle pl-3">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorPAD1" value="Si" name="customRadioForm2SistemaCompresorPAD" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorPAD1">Si</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorPAD2" value="No" name="customRadioForm2SistemaCompresorPAD" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorPAD2">No</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadioForm2SistemaCompresorPAD3" value="Other" name="customRadioForm2SistemaCompresorPAD" class="custom-control-input">
+                                    <label class="custom-control-label" for="customRadioForm2SistemaCompresorPAD3">Other:</label>
+                                </div>
+                            </div>
+                            <input id="otherForm2SistemaCompresorPAD4" class="form-control" type="text" placeholder="Other:" disabled="disabled" name="customRadioForm2SistemaCompresorPADOther">
+                            <div id="ControlForm2GroupF1Invalid" class="text-danger col-12" style="visibility: hidden">
+                                Indica un valor para PAD (+)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3 pt-2 pb-2">
+                    <button id="BtnNextForm2Control" class="btn btn-primary" type="button"> Siguiente </button>
+                </div>
+            </div>
+
+            @* From3 *@
+            <div class="tab-pane fade" id="form3" role="tabpanel" aria-labelledby="navPagina3FormControl">
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <label for="example-text-input" class="col-12 col-form-label">
+                                Complicaciones
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <input id="ControlForm3Complicaciones" class="form-control" type="text" placeholder="Tu respuesta" name="Form3SistemaCompresorComplicaciones">
+                            </div>
+                            <div id="ControlForm3ComplicacionesInvalid" class="text-danger col-12" style="visibility: hidden">
+                                Indica un valor para Complicaciones
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <label for="example-text-input" class="col-12 col-form-label">
+                                Observaciones
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <input id="ControlForm3Observaciones" class="form-control" type="text" placeholder="Tu respuesta" name="Form3SistemaCompresorObservaciones">
+                            </div>
+                            <div id="ControlForm3ObservacionesInvalid" class="text-danger col-12" style="visibility: hidden">
+                                Indica un valor para Observaciones
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5 pt-2 pb-2">
+                    <button id="buttonPopupForm1" type="button" class="btn btn-success ui-scroll-popup font-weight-bold"> Crear <span class="fa fa-share"></span> </button>
+                    <input id="submitForm1" type="submit" name="submit" class="btn btn-success" hidden="hidden" />
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="modal fade" id="form1ModalEnviar">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content text-center">
+                <div class="modal-header">
+                    <p class="font-weight-bold">Control de Sistema Compresor - Crear</p>
+                    <button type="button" class="btn btn-danger" id="buttonPopupCerrar"> <span class="fa fa-window-close"></span> </button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Crear el nuevo formulario?</p>
+                    <div id="spinner_ModalSubmitFormSistemaCompresor" hidden="hidden" class="spinner-border" role="status">
+                        <span class="sr-only"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="popupConfirmarForm1SistemaCompresor" type="button" class="btn btn-success ui-scroll-popup font-weight-bold float-right"> Crear   <span class="fa fa-plus"></span> </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

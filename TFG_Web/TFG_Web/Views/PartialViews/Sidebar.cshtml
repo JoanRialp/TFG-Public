@@ -1,0 +1,129 @@
+﻿<!-- Sidebar  -->
+<nav id="sidebar">
+    <div id="headerSideBar" class="sidebar-header">
+        <span style="display:inline-block">
+            <h3>ppt</h3>
+            <strong>ppt-huav</strong>
+        </span>
+        <span class="cerrarSideBar">
+            <button type="button" onclick="cerrarSideBar()" class="fas fa-times-circle fa-1x"></button>
+        </span>
+    </div>
+    <ul class="list-unstyled components">
+        <li class="active">
+            <div id="itemsSidebar" class="nav-item">
+                <a id="itemsSidebarHomeClinics" class="nav-link text-dark" asp-area="Clinics" asp-controller="HomeClinics" asp-action="Index">
+                    <i id="logoItemsSideBar" class="fas fa-home fa-2x"></i>
+                </a>
+            </div>
+            <div id="itemsSidebarActive" class="nav-item">
+                <a id="itemsSidebarHomeClinicsActive" class="nav-link text-dark" asp-area="Clinics" asp-controller="HomeClinics" asp-action="Index">
+                    <i id="logoItemsSideBar" class="fas fa-home fa-2x"></i>
+                    Inicio
+                </a>
+            </div>
+        </li>
+        <li class="active">
+            <div id="itemsSidebar" class="nav-item">
+                <a id="itemsSidebarEstadistica" class="nav-link text-dark" asp-area="Clinics" asp-controller="Estadistica" asp-action="Index">
+                    <i id="logoItemsSideBar" class="fas fa-chart-pie fa-2x"></i>
+                </a>
+            </div>
+            <div id="itemsSidebarActive">
+                <a id="itemsSidebarEstadisticaActive" class="nav-link text-dark" asp-area="Clinics" asp-controller="Estadistica" asp-action="Index">
+                    <i id="logoItemsSideBar" class="fas fa-chart-pie fa-2x"></i>
+                    Estadística
+                </a>
+            </div>
+        </li>
+        <li class="active">
+            <div id="itemsSidebar" class="nav-item">
+                <a id="itemsSidebarFormControlSistemaCompresor" class="nav-link text-dark" asp-area="Clinics" asp-controller="FormControlSistemaCompresor" asp-action="Index">
+                    <i id="logoItemsSideBar" class="fas fa-x-ray fa-2x"></i>
+                </a>
+            </div>
+            <div id="itemsSidebarActive">
+                <a id="itemsSidebarFormControlSistemaCompresorActive" class="nav-link text-dark" asp-area="Clinics" asp-controller="FormControlSistemaCompresor" asp-action="Index">
+                    <i id="logoItemsSideBar" class="fas fa-x-ray fa-2x"></i>
+                    Sistema Compresor
+                </a>
+            </div>
+        </li>
+        <li class="active">
+            <div id="itemsSidebar" class="nav-item">
+                <a id="itemsSidebarCampanaPectusExcavatum" class="nav-link text-dark" asp-area="Clinics" asp-controller="FormControlCampanaPectusExcavatum" asp-action="Index">
+                    <i id="logoItemsSideBar" class="fas fa-band-aid fa-2x"></i>
+                </a>
+            </div>
+            <div id="itemsSidebarActive">
+                <a id="itemsSidebarCampanaPectusExcavatumActive" class="nav-link text-dark" asp-area="Clinics" asp-controller="FormControlCampanaPectusExcavatum" asp-action="Index">
+                    <i id="logoItemsSideBar" class="fas fa-band-aid fa-2x"></i>
+                    Pectus Excavatum
+                </a>
+            </div>
+        </li>
+        <li class="active">
+            <div id="itemsSidebar" class="nav-item">
+                <a id="itemsSidebarNuevoUsuario" class="nav-link text-dark" asp-area="Clinics" asp-controller="NuevoUsuario" asp-action="Index">
+                    <i id="logoItemsSideBar" class="fas fa-plus-circle fa-2x"></i>
+                </a>
+            </div>
+            <div id="itemsSidebarActive">
+                <a id="itemsSidebarNuevoUsuarioActive" class="nav-link text-dark" asp-area="Clinics" asp-controller="NuevoUsuario" asp-action="Index">
+                    <i id="logoItemsSideBar" class="fas fa-plus-circle fa-2x"></i>
+                    Nuevo Paciente
+                </a>
+            </div>
+        </li>
+        <li class="active">
+            <div id="itemsSidebar" class="nav-item">
+                <a id="itemsSidebarPacienteFinalizado" class="nav-link text-dark fa-2x" asp-area="Clinics" asp-controller="PacienteFinalizado" asp-action="Index">
+                    <i id="logoItemsSideBar" class="fas fa-ban fa-2x"></i>
+                </a>
+            </div>
+            <div id="itemsSidebarActive">
+                <a id="itemsSidebarPacienteFinalizadoActive" class="nav-link text-dark" asp-area="Clinics" asp-controller="PacienteFinalizado" asp-action="Index">
+                    <i id="logoItemsSideBar" class="fas fa-ban fa-2x"></i>
+                    Pacientes Finalizados
+                </a>
+            </div>
+        </li>
+        <li id="botonAñadirUsuario" style="display:none" class="active">
+            <div id="itemsSidebar" class="nav-item">
+                <a id="itemsSidebarAñadirUsuario" class="nav-link text-dark fa-2x" asp-area="Clinics" asp-controller="AnadirUsuario" asp-action="Index">
+                    <i id="logoItemsSideBar" class="fas fa-plus fa-2x"></i>
+                </a>
+            </div>
+            <div id="itemsSidebarActive">
+                <a id="itemsSidebarAñadirUsuarioActive" class="nav-link text-dark" asp-area="Clinics" asp-controller="AnadirUsuario" asp-action="Index">
+                    <i id="logoItemsSideBar" class="fas fa-plus fa-2x"></i>
+                    Añadir Usuario
+                </a>
+            </div>
+        </li>
+        <li class="active">
+            <div id="itemsSidebar" class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="LoginUsuario" asp-action="LogOutUser">
+                    <i id="logoItemsSideBar" class="fas fa-sign-out-alt fa-2x"></i>
+                </a>
+            </div>
+            <div id="textSidebar">
+                <a class="nav-link text-dark" asp-area="" asp-controller="LoginUsuario" asp-action="LogOutUser">
+                    <i id="logoItemsSideBar" class="fas fa-sign-out-alt fa-2x"></i>
+                    Cerrar sesión
+                </a>
+            </div>
+        </li>
+    </ul>
+        @*
+        <ul class="list-unstyled CTAs">
+            <li>
+                <a href="" class="download">Download</a>
+            </li>
+            <li>
+                <a href="" class="article">Article</a>
+            </li>
+        </ul>
+        *@
+</nav>
+    

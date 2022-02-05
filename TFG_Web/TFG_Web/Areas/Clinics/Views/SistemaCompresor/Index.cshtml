@@ -1,0 +1,252 @@
+﻿@model ViewModel
+@{
+    ViewData["Title"] = "Sistema Compresor";
+}
+
+<div class="d-flex justify-content-center flex-column">
+    <div class="jumbotron text-center">
+        <h1>Sistema Compresor</h1>
+    </div>
+
+    <div class="col-sm-12" style="margin-bottom:2%">
+        <h5><strong>Paciente: </strong> @Model.Pacientes.P_Nombre</h5>
+        <a class="btn btn-primary font-weight-bold float-left" asp-area="Clinics" asp-controller="PerfilPaciente" asp-action="Index" asp-route-id="@Model.Pacientes.Id">
+            <span class="fa fa-arrow-left"></span> Paciente
+        </a>
+        <a id="buttonModalEliminarSistemaCompresor" class="btn btn-danger font-weight-bold float-right" style="display:inline-block; color:white; margin-left:1%; cursor:pointer;">
+            <i class="fas fa-trash"></i>
+            Eliminar
+        </a>
+        <button id="buttonSistemaCompresorEditar" class="btn btn-primary font-weight-bold float-right" type="button" style="display:inline-block">
+            <i class="fas fa-edit"></i>
+            Editar
+        </button>
+    </div>
+
+    @*Bootstrap table*@
+    <div class="row">
+        <div class="table-responsive col-12 mx-auto" align="left">
+            <form id="" asp-area="Clinics" asp-controller="SistemaCompresor" asp-action="CambiarSistemaCompresor" method="post" asp-antiforgery="true">
+                <input hidden="hidden" class="form-control" type="text" name="pacienteId" value="@Model.Pacientes.Id">
+                <input hidden="hidden" class="form-control" type="text" name="sistemaCompresorId" value="@Model.ControlSistemaCompresor.Id">
+
+                <table class="table table-responsive">
+                    <thead>
+                        <tr class="text-center align-text-bottom" style="background-color:#87CEFA">
+                            <th style="vertical-align: middle" scope="col">Ajustes Sistema Compresor Dinamico</th>
+                            <th style="vertical-align: middle" scope="col">Compilaciones</th>
+                            <th style="vertical-align: middle" scope="col">Doblador</th>
+                            <th style="vertical-align: middle" scope="col">F1</th>
+                            <th style="vertical-align: middle" scope="col">F2</th>
+                            <th style="vertical-align: middle" scope="col">F3</th>
+                            <th style="vertical-align: middle" scope="col">F4</th>
+                            <th style="vertical-align: middle" scope="col">F5</th>
+                            <th style="vertical-align: middle" scope="col">Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-sm-center" id="formSistemaCompresorInputs">
+                            @{var array = new string[] { "Sin Modificar", "+1", "+2", "+3", "-1", "-2", "-3" };}
+                            @{var arrayF = new string[] { "F1", "F2", "F3", "F4", "F5" };}
+                            @{var arrayAjustes = new string[] { "Si", "No" };}
+
+                            <td>
+                                <!--#region Select Ajustes  -->
+                                <select class="form-control" style="text-align-last:center;" name="formSistemaCompresorAjustes" disabled>
+                                    @for (int i = 0; i < arrayAjustes.Length; i++)
+                                    {
+                                        if (arrayAjustes[i] != @Model.ControlSistemaCompresor.CSC_AjustesSistemaCompresorDinamico)
+                                        {
+                                            <option value=@arrayAjustes[i]>@arrayAjustes[i]</option>
+                                        }
+                                        else
+                                        {
+                                            <option value=@arrayAjustes[i] selected>@arrayAjustes[i]</option>
+                                        }
+                                    }
+                                </select>
+                                <!--#endregion -->
+                            </td>
+                            <td> <input disabled style="text-align:center" class="form-control" type="text" placeholder="Compilaciones" name="formSistemaCompresorCompilaciones" value="@Model.ControlSistemaCompresor.CSC_Compilaciones"></td>
+                            <td>
+                                <!--#region Select Doblador  -->
+                                <select class="form-control" style="text-align-last:center" name="formSistemaCompresorDoblador" disabled>
+                                    @for (int i = 0; i < arrayF.Length; i++)
+                                    {
+                                        if (arrayF[i] != @Model.ControlSistemaCompresor.CSC_Doblador)
+                                        {
+                                            <option value=@arrayF[i]>@arrayF[i]</option>
+                                        }
+                                        else
+                                        {
+                                            <option value=@arrayF[i] selected>@arrayF[i]</option>
+                                        }
+                                    }
+                                </select>
+                                <!--#endregion -->
+                            </td>
+                            <td>
+                                <!--#region Select F1  -->
+                                <select class="form-control" style="text-align-last:center" name="formSistemaCompresorF1" disabled>
+                                    @for (int i = 0; i < array.Length; i++)
+                                    {
+                                        if (@array[i] != @Model.ControlSistemaCompresor.CSC_F1)
+                                        {
+                                            <option value=@array[i]>@array[i]</option>
+                                        }
+                                        else
+                                        {
+                                            <option value=@array[i] selected>@array[i]</option>
+                                        }
+                                    }
+                                </select>
+                                <!--#endregion -->
+                            </td>
+                            <td>
+                                <!--#region Select F2  -->
+                                <select class="form-control" style="text-align-last:center" name="formSistemaCompresorF2" disabled>
+                                    @for (int i = 0; i < array.Length; i++)
+                                    {
+                                        if (@array[i] != @Model.ControlSistemaCompresor.CSC_F2)
+                                        {
+                                            <option value=@array[i]>@array[i]</option>
+                                        }
+                                        else
+                                        {
+                                            <option value=@array[i] selected>@array[i]</option>
+                                        }
+                                    }
+                                </select>
+                                <!--#endregion -->
+                            </td>
+                            <td>
+                                <!--#region Select F3  -->
+                                <select class="form-control" style="text-align-last:center" name="formSistemaCompresorF3" disabled>
+                                    @for (int i = 0; i < array.Length; i++)
+                                    {
+                                        if (@array[i] != @Model.ControlSistemaCompresor.CSC_F3)
+                                        {
+                                            <option value=@array[i]>@array[i]</option>
+                                        }
+                                        else
+                                        {
+                                            <option value=@array[i] selected>@array[i]</option>
+                                        }
+                                    }
+                                </select>
+                                <!--#endregion -->
+                            </td>
+                            <td>
+                                <!--#region Select F4  -->
+                                <select class="form-control" style="text-align-last:center" name="formSistemaCompresorF4" disabled>
+                                    @for (int i = 0; i < array.Length; i++)
+                                    {
+                                        if (@array[i] != @Model.ControlSistemaCompresor.CSC_F4)
+                                        {
+                                            <option value=@array[i]>@array[i]</option>
+                                        }
+                                        else
+                                        {
+                                            <option value=@array[i] selected>@array[i]</option>
+                                        }
+                                    }
+                                </select>
+                                <!--#endregion -->
+                            </td>
+                            <td>
+                                <!--#region Select F5  -->
+                                <select class="form-control" style="text-align-last:center" name="formSistemaCompresorF5" disabled>
+                                    @for (int i = 0; i < array.Length; i++)
+                                    {
+                                        if (@array[i] != @Model.ControlSistemaCompresor.CSC_F5)
+                                        {
+                                            <option value=@array[i]>@array[i]</option>
+                                        }
+                                        else
+                                        {
+                                            <option value=@array[i] selected>@array[i]</option>
+                                        }
+                                    }
+                                </select>
+                                <!--#endregion -->
+                            </td>
+                            <td> <input disabled style="text-align:center" class="form-control" type="date" placeholder="Fecha" name="formSistemaCompresorFecha" value="@Model.ControlSistemaCompresor.CSC_Fecha.ToString("yyyy-MM-dd")"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <br />
+
+                <table class="table table-responsive">
+                    <thead>
+                        <tr class="text-center align-text-bottom" style="background-color:#87CEFA">
+                            <th style="vertical-align: middle" scope="col">Grupo</th>
+                            <th style="vertical-align: middle" scope="col">Horas uso dia</th>
+                            <th style="vertical-align: middle" scope="col">Horas uso noche</th>
+                            <th style="vertical-align: middle" scope="col">Observaciones</th>
+                            <th style="vertical-align: middle" scope="col">PAD</th>
+                            <th style="vertical-align: middle" scope="col">PC</th>
+                            <th style="vertical-align: middle" scope="col">PT Post Ajustes</th>
+                            <th style="vertical-align: middle" scope="col">PT Pre Ajustes</th>
+                            <th style="vertical-align: middle" scope="col">Recambio Pieza</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-sm-center" id="formSistemaCompresorInputs2">
+                            @{var arrayGrupo = new int[] { 1, 2, 3, 4 };}
+
+                            <td>
+                                <!--#region Select Grupo  -->
+                                <select class="form-control" style="text-align-last:center;width:auto" name="formSistemaCompresorGrupo" disabled>
+                                    @for (int i = 0; i < arrayGrupo.Length; i++)
+                                    {
+                                        if (arrayGrupo[i] != @Model.ControlSistemaCompresor.CSC_Grupo)
+                                        {
+                                            <option value=@arrayGrupo[i]> @arrayGrupo[i] </option>
+                                        }
+                                        else
+                                        {
+                                            <option value=@arrayGrupo[i] selected> @arrayGrupo[i] </option>
+                                        }
+                                    }
+                                </select>
+                                <!--#endregion -->
+                            </td>
+                            <td> <input disabled style="text-align:center" class="form-control" type="number" placeholder="Horas uso dia" name="formSistemaCompresorHorasDia" value="@Model.ControlSistemaCompresor.CSC_HorasUsoDia"></td>
+                            <td> <input disabled style="text-align:center" class="form-control" type="number" placeholder="Horas uso noche" name="formSistemaCompresorHorasNoche" value="@Model.ControlSistemaCompresor.CSC_HorasUsoNoche"></td>
+                            <td> <input disabled style="text-align:center" class="form-control" type="text" placeholder="Observaciones" name="formSistemaCompresorObservaciones" value="@Model.ControlSistemaCompresor.CSC_Observaciones"></td>
+                            <td> <input disabled style="text-align:center" class="form-control" type="text" placeholder="PAD" name="formSistemaCompresorPAD" value="@Model.ControlSistemaCompresor.CSC_PAD"></td>
+                            <td> <input disabled style="text-align:center" class="form-control" type="text" placeholder="PC" name="formSistemaCompresorPC" value="@Model.ControlSistemaCompresor.CSC_PC"></td>
+                            <td> <input disabled style="text-align:center" class="form-control" type="text" placeholder="PT Post Ajustes" name="formSistemaCompresorPTPostAjustes" value="@Model.ControlSistemaCompresor.CSC_PTPostAjustes"></td>
+                            <td> <input disabled style="text-align:center" class="form-control" type="text" placeholder="PT Pre Ajustes" name="formSistemaCompresorPTPreAjustes" value="@Model.ControlSistemaCompresor.CSC_PTPreAjustes"></td>
+                            <td>
+                                <!--#region Select Recambio Pieza  -->
+                                <select class="form-control" style="text-align-last:center" name="formSistemaCompresorRecambioPieza" disabled>
+                                    @for (int i = 0; i < arrayF.Length; i++)
+                                    {
+                                        if (arrayF[i] != @Model.ControlSistemaCompresor.CSC_RecambioPieza)
+                                        {
+                                            <option value=@arrayF[i]>@arrayF[i]</option>
+                                        }
+                                        else
+                                        {
+                                            <option value=@arrayF[i] selected>@arrayF[i]</option>
+                                        }
+                                    }
+                                </select>
+                                <!--#endregion -->
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div id="buttonsSubmitFormSistemaCompresorEditar" class="col-xs-12" hidden="hidden">
+                    <br>
+                    <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Guardar</button>
+                    <button id="buttonSistemaCompresorEditarHidden" class="btn btn-lg btn-danger" type="button"><span class="fa fa-window-close"></span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr />
+    <partial name="Modals/ModalEliminarSistemaCompresor.cshtml" />
+</div>

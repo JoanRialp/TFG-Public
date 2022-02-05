@@ -1,0 +1,107 @@
+﻿@model ViewModel
+@{
+    ViewData["Title"] = "Campana Pectus Excavatum";
+}
+
+<div class="d-flex justify-content-center flex-column">
+    <div class="jumbotron text-center">
+        <h1>Campana Pectus Excavatum</h1>
+    </div>
+
+    <div class="col-sm-12" style="margin-bottom:2%">
+        <h5><strong>Paciente: </strong> @Model.Pacientes.P_Nombre</h5>
+        <a class="btn btn-primary font-weight-bold float-left" asp-area="Clinics" asp-controller="PerfilPaciente" asp-action="Index" asp-route-id="@Model.Pacientes.Id">
+            <span class="fa fa-arrow-left"></span> Paciente
+        </a>
+        <a id="buttonModalEliminarCampanaPectusExcavatum" class="btn btn-danger font-weight-bold float-right" style="display:inline-block; color:white; margin-left:1%; cursor:pointer;">
+            <i class="fas fa-trash"></i>
+            Eliminar
+        </a>
+        <button id="buttonCampanaPectusExcavatumEditar" class="btn btn-primary font-weight-bold float-right" type="button" style="display:inline-block;">
+            <i class="fas fa-edit"></i>
+            Editar
+        </button>
+    </div>
+
+    @*Bootstrap table*@
+    <div class="row">
+        <div class="table-responsive col-sm-12 mx-auto" align="left">
+            <form id="" asp-area="Clinics" asp-controller="CampanaPectusExcavatum" asp-action="CambiarPectusExcavatum" method="post" asp-antiforgery="true">
+                <input hidden="hidden" class="form-control" type="text" name="pacienteId" value="@Model.Pacientes.Id">
+                <input hidden="hidden" class="form-control" type="text" name="pectusExcavatumId" value="@Model.ControlCampanaPectusExcavatum.Id">
+
+                <table class="table table-responsive">
+                    <thead>
+                        <tr class="text-center align-text-bottom" style="background-color:#87CEFA">
+                            <th style="vertical-align: middle" scope="col">Complicaciones</th>
+                            <th style="vertical-align: middle" scope="col">Fecha</th>
+                            <th style="vertical-align: middle" scope="col">Fotos</th>
+                            <th style="vertical-align: middle" scope="col">Horas uso dia</th>
+                            <th style="vertical-align: middle" scope="col">Horas uso noche</th>
+                            <th style="vertical-align: middle" scope="col">Indicada</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-sm-center" id="formCampanaPectusExcavatumInputs">
+                            @{var arrayFotos = new string[] { "Si", "No" };}
+
+                            <td> <input disabled style="text-align:center" class="form-control" type="text" placeholder="Complicaciones" name="formCampanaPectusExcavatumComplicaciones" value="@Model.ControlCampanaPectusExcavatum.CCPE_Complicaciones"> </td>
+                            <td> <input disabled style="text-align:center" class="form-control" type="date" placeholder="Fecha" name="formCampanaPectusExcavatumFecha" value="@Model.ControlCampanaPectusExcavatum.CCPE_Fecha.ToString("yyyy-MM-dd")"> </td>
+                            <td>
+                                <!--#region Select Fotos  -->
+                                <select class="form-control" style="text-align-last:center;width:auto" name="formCampanaPectusExcavatumFotos" disabled>
+                                    @for (int i = 0; i < arrayFotos.Length; i++)
+                                    {
+                                        if (arrayFotos[i] != @Model.ControlCampanaPectusExcavatum.CCPE_Fotos)
+                                        {
+                                            <option value=@arrayFotos[i]>@arrayFotos[i]</option>
+                                        }
+                                        else
+                                        {
+                                            <option value=@arrayFotos[i] selected>@arrayFotos[i]</option>
+                                        }
+                                    }
+                                </select>
+                                <!--#endregion -->
+                            </td>
+                            <td> <input disabled style="text-align:center" class="form-control" type="number" placeholder="Horas uso dia" name="formCampanaPectusExcavatumHorasDia" value="@Model.ControlCampanaPectusExcavatum.CCPE_HorasUsoDia"> </td>
+                            <td> <input disabled style="text-align:center" class="form-control" type="number" placeholder="Horas uso noche" name="formCampanaPectusExcavatumHorasNoche" value="@Model.ControlCampanaPectusExcavatum.CCPE_HorasUsoNoche"> </td>
+                            <td> <input disabled style="text-align:center" class="form-control" type="text" placeholder="Indicada" name="formCampanaPectusExcavatumIndicada" value="@Model.ControlCampanaPectusExcavatum.CCPE_Indicada"> </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <br />
+
+                <table class="table table-responsive">
+                    <thead>
+                        <tr class="text-center align-text-bottom" style="background-color:#87CEFA">
+                            <th style="vertical-align: middle" scope="col">Numero pumps indicados</th>
+                            <th style="vertical-align: middle" scope="col">Numero pumps uso</th>
+                            <th style="vertical-align: middle" scope="col">Observaciones</th>
+                            <th style="vertical-align: middle" scope="col">Presion tratamiento</th>
+                            <th style="vertical-align: middle" scope="col">Uso</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-sm-center" id="formCampanaPectusExcavatumInputs2">
+                            <td> <input disabled style="text-align:center" class="form-control" type="text" placeholder="Numero pumps indicados" name="formCampanaPectusExcavatumNumeroPumpsIndicados" value="@Model.ControlCampanaPectusExcavatum.CCPE_NumeroPumpsIndicados"> </td>
+                            <td> <input disabled style="text-align:center" class="form-control" type="text" placeholder="Numero pumps uso" name="formCampanaPectusExcavatumNumeroPumpsUso" value="@Model.ControlCampanaPectusExcavatum.CCPE_NumeroPumpsUso"> </td>
+                            <td> <input disabled style="text-align:center" class="form-control" type="text" placeholder="Observaciones" name="formCampanaPectusExcavatumObservaciones" value="@Model.ControlCampanaPectusExcavatum.CCPE_Observaciones"> </td>
+                            <td> <input disabled style="text-align:center" class="form-control" type="text" placeholder="Presion tratamiento" name="formCampanaPectusExcavatumPresionTratamiento" value="@Model.ControlCampanaPectusExcavatum.CCPE_PresionTratamiento"> </td>
+                            <td> <input disabled style="text-align:center" class="form-control" type="number" placeholder="Uso" name="formCampanaPectusExcavatumUso" value="@Model.ControlCampanaPectusExcavatum.CCPE_Uso"> </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+                <div id="buttonsSubmitFormControlPectusExcavatumEditar" class="col-xs-12" hidden="hidden">
+                    <br>
+                    <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Guardar</button>
+                    <button id="buttonCampanaPectusExcavatumEditarHidden" class="btn btn-lg btn-danger" type="button"><span class="fa fa-window-close"></span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr />
+    <partial name="Modals/ModalEliminarCampanaPectus.cshtml" />
+</div>

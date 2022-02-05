@@ -1,0 +1,170 @@
+﻿<div class="tab-pane fade" id="form7" role="tabpanel" aria-labelledby="navPagina7FormUsuario">
+    <div class="tab-pane active" id="home">
+        <hr>
+        @if (Model.PectusCarinatum != null)
+        {
+            <form asp-area="Clinics" asp-controller="PerfilPaciente" asp-action="formPectusCarinatumPerfilPacientesGuardarInputs" method="post" asp-antiforgery="true">
+                <input type="text" class="form-control" hidden="hidden" name="idPaciente" value="@Model.Pacientes.Id">
+                <input type="text" class="form-control" hidden="hidden" name="formTipoPectusPerfilPacienteId" value="@Model.PectusCarinatum[0].Id">
+                <h3>Pectus Carinatum</h3>
+                <br />
+                <div id="formTipoPectusPerfilPacienteInputs">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="first_name"><h5>Tipo</h5></label>
+                            <input type="text" class="form-control" disabled name="formPectusCarinatumPerfilPacienteTipo" placeholder="Vacio" value="@Model.PectusCarinatum[0].PC_Tipo">
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="first_name"><h5>Simetria</h5></label>
+                            <input type="text" class="form-control" disabled name="formPectusCarinatumPerfilPacienteSimetria" placeholder="Vacio" value="@Model.PectusCarinatum[0].PC_Simetria">
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="first_name"><h5>Rotacion Esternal</h5></label>
+                            <input type="text" class="form-control" disabled name="formPectusCarinatumPerfilPacienteRotacion" placeholder="Vacio" value="@Model.PectusCarinatum[0].PC_RotacionEsternal">
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="first_name"><h5>Presion Correccion</h5></label>
+                            <input type="text" class="form-control" disabled name="formPectusCarinatumPerfilPacientePresion" placeholder="Vacio" value="@Model.PectusCarinatum[0].PC_PresionCorreccion">
+                        </div>
+                    </div>
+                </div>
+                <div id="buttonsSubmitFormTipoPectusSistemaCompresorEditar" hidden="hidden" class="form-group">
+                    <div class="col-xs-12">
+                        <br>
+                        <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Guardar</button>
+                        <button id="buttonFormTipoPectusSistemaCompresorEditarHidden" class="btn btn-lg btn-danger" type="button"><span class="fa fa-window-close"></span></button>
+                    </div>
+                </div>
+            </form>
+        }
+
+        @if (Model.PectusExcavatum != null)
+        {
+            <form asp-area="Clinics" asp-controller="PerfilPaciente" asp-action="formPectusExcavatumPerfilPacientesGuardarInputs" method="post" asp-antiforgery="true">
+                <input type="text" class="form-control" hidden="hidden" name="idPaciente" value="@Model.Pacientes.Id">
+                <input type="text" class="form-control" hidden="hidden" name="formTipoPectusPerfilPacienteId" value="@Model.PectusExcavatum[0].Id">
+                <h3>Pectus Excavatum</h3>
+                <br />
+                <div id="formTipoPectusPerfilPacienteInputs">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="first_name"><h5>Simetria</h5></label>
+                            <input type="text" class="form-control" disabled name="formPectusExcavatumPerfilPacienteSimetria" placeholder="Vacio" value="@Model.PectusExcavatum[0].PE_Simetria">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="first_name"><h5>Hundimiento Toracico Parado</h5></label>
+                            <input type="text" class="form-control" disabled name="formPectusExcavatumPerfilPacienteHundimientoParado" placeholder="Vacio" value="@Model.PectusExcavatum[0].PE_HundimientoToracicoParado">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="first_name"><h5>Hundimiento Toracico Acostado</h5></label>
+                            <input type="text" class="form-control" disabled name="formPectusExcavatumPerfilPacienteHundimientoAcostado" placeholder="Vacio" value="@Model.PectusExcavatum[0].PE_HundimientoToracicoAcostado">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="first_name"><h5>Rotacion Esternal</h5></label>
+                            <input type="text" class="form-control" disabled name="formPectusExcavatumPerfilPacienteRotacionEsternal" placeholder="Vacio" value="@Model.PectusExcavatum[0].PE_RotacionEsternal">
+                        </div>
+                    </div>
+                </div>
+                <div id="buttonsSubmitFormTipoPectusSistemaCompresorEditar" hidden="hidden" class="form-group">
+                    <div class="col-xs-12">
+                        <br>
+                        <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Guardar</button>
+                        <button id="buttonFormTipoPectusSistemaCompresorEditarHidden" class="btn btn-lg btn-danger" type="button"><span class="fa fa-window-close"></span></button>
+                    </div>
+                </div>
+            </form>
+        }
+
+        @if (Model.PectusMixto != null)
+        {
+            <form asp-area="Clinics" asp-controller="PerfilPaciente" asp-action="formPectusMixtoPerfilPacientesGuardarInputs" method="post" asp-antiforgery="true">
+                <input type="text" class="form-control" hidden="hidden" name="idPaciente" value="@Model.Pacientes.Id">
+                <input type="text" class="form-control" hidden="hidden" name="formTipoPectusPerfilPacienteId" value="@Model.PectusMixto[0].Id">
+                <h3>Pectus Mixto</h3>
+                <br />
+                <div id="formTipoPectusPerfilPacienteInputs">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="first_name"><h5>Ubicacion por defecto</h5></label>
+                            <input type="text" class="form-control" disabled name="formPectusMixtoPerfilPacienteUbicacion" placeholder="Vacio" value="@Model.PectusMixto[0].PM_UbicacionDefecto">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="first_name"><h5>Presion Correccion Pectus Carinatum</h5></label>
+                            <input type="text" class="form-control" disabled name="formPectusMixtoPerfilPacientePresion" placeholder="Vacio" value="@Model.PectusMixto[0].PM_PresionCorreccionPectusCarinatum">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="first_name"><h5>Rotacion Esternal</h5></label>
+                            <input type="text" class="form-control" disabled name="formPectusMixtoPerfilPacienteRotacion" placeholder="Vacio" value="@Model.PectusMixto[0].PM_RotacionEsternal">
+                        </div>
+                    </div>
+                </div>
+                <div id="buttonsSubmitFormTipoPectusSistemaCompresorEditar" hidden="hidden" class="form-group">
+                    <div class="col-xs-12">
+                        <br>
+                        <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Guardar</button>
+                        <button id="buttonFormTipoPectusSistemaCompresorEditarHidden" class="btn btn-lg btn-danger" type="button"><span class="fa fa-window-close"></span></button>
+                    </div>
+                </div>
+            </form>
+        }
+
+        @if (Model.SindromePoland != null)
+        {
+            <form asp-area="Clinics" asp-controller="PerfilPaciente" asp-action="formSindromePolandPerfilPacientesGuardarInputs" method="post" asp-antiforgery="true">
+                <input type="text" class="form-control" hidden="hidden" name="idPaciente" value="@Model.Pacientes.Id">
+                <input type="text" class="form-control" hidden="hidden" name="formTipoPectusPerfilPacienteId" value="@Model.SindromePoland[0].Id">
+                <h3>Sindrome Poland</h3>
+                <br />
+                <div id="formTipoPectusPerfilPacienteInputs">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="first_name"><h5>Anomalia Toracica</h5></label>
+                            <input type="text" class="form-control" disabled name="formSindromePolandPerfilPacienteToracica" placeholder="Vacio" value="@Model.SindromePoland[0].SP_AnomaliaToracica">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="first_name"><h5>Anomalia Mamaria</h5></label>
+                            <input type="text" class="form-control" disabled name="formSindromePolandPerfilPacienteMamaria" placeholder="Vacio" value="@Model.SindromePoland[0].SP_AnomaliaMamaria">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="first_name"><h5>Anomalia Complejo Pezon Areola</h5></label>
+                            <input type="text" class="form-control" disabled name="formSindromePolandPerfilPacienteAnomaliaCompleja" placeholder="Vacio" value="@Model.SindromePoland[0].SP_AnomaliaComplejoPezonAreola">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="first_name"><h5>T2 T3 T4</h5></label>
+                            <input type="text" class="form-control" disabled name="formSindromePolandPerfilPacienteT2T3T4" placeholder="Vacio" value="@Model.SindromePoland[0].SP_T2T3T4">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="first_name"><h5>PCPSI Pectus Carinatum</h5></label>
+                            <input type="text" class="form-control" disabled name="formSindromePolandPerfilPacientePCPSI" placeholder="Vacio" value="@Model.SindromePoland[0].SP_PCPSIPectusCarinatum">
+                        </div>
+                    </div>
+                </div>
+                <div id="buttonsSubmitFormTipoPectusSistemaCompresorEditar" hidden="hidden" class="form-group">
+                    <div class="col-xs-12">
+                        <br>
+                        <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Guardar</button>
+                        <button id="buttonFormTipoPectusSistemaCompresorEditarHidden" class="btn btn-lg btn-danger" type="button"><span class="fa fa-window-close"></span></button>
+                    </div>
+                </div>
+            </form>
+        }
+    </div>
+</div>

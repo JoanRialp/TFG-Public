@@ -1,0 +1,27 @@
+﻿<div class="modal fade" role="dialog" id="modalEliminarPaciente">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content text-center">
+            <div class="modal-header">
+                <p class="font-weight-bold">Eliminar Paciente</p>
+                <button type="button" class="btn btn-danger" id="buttonCerrarModalEliminarPaciente"> <span class="fa fa-window-close"></span> </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estas seguro/a de eliminar el paciente: <strong>@Model.HistorialClinico.HC_Nombre</strong>?</p>
+                <input id="inputModalEliminarPacienteControl" class="form-control" type="text" placeholder="Nombre paciente..." value="">
+                <br/>
+                <a id="modalEliminarPacienteErrorMensaje" style="color:red" hidden="hidden">Nombre incorrecto</a>
+
+                <a id="modalEliminarPaciente_NombrePaciente" hidden="hidden">@Model.HistorialClinico.HC_Nombre</a>
+                <div id="spinner_ModalSubmitFormNuevoUsuario" hidden="hidden" class="spinner-border" role="status">
+                    <span class="sr-only"></span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="buttonSubmitModalEliminarPaciente" type="button" class="btn btn-danger ui-scroll-popup font-weight-bold float-right"> 
+                    Eliminar <span class="fa fa-trash"></span> 
+                </button>
+                <a id="submitModalEliminarPaciente" hidden="hidden" asp-area="Clinics" asp-controller="PerfilPaciente" asp-action="eliminarPacienteHistorial" asp-route-id="@Model.Pacientes.Id"></a>
+            </div>
+        </div>
+    </div>
+</div>

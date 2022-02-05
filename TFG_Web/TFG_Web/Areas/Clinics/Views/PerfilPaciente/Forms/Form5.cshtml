@@ -1,0 +1,50 @@
+﻿<div class="tab-pane fade" id="form5" role="tabpanel" aria-labelledby="navPagina5FormUsuario">
+    <div class="tab-pane" id="home">
+        <form asp-area="Clinics" asp-controller="PerfilPaciente" asp-action="form5PerfilPacientesGuardarInputs" method="post" asp-antiforgery="true">
+            <input type="text" class="form-control" hidden="hidden" name="form5PerfilPacienteId" value="@Model.Deporte[0].Id">
+            <input type="text" class="form-control" hidden="hidden" name="idPaciente" value="@Model.Pacientes.Id">
+            <hr>
+            <h3>Deportes</h3>
+            <br />
+            <div id="form5PerfilPacienteInputs">
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label for="first_name"><h5>Cuál/es?</h5></label>
+                        @{
+                            for (int i = 0; i < Model.Deporte[0].D_Cual.Length; i++)
+                            {
+                                <input type="text" class="form-control" disabled name="form5PerfilPacienteCual" placeholder="Vacio" value="@Model.Deporte[0].D_Cual[i]">
+                            }
+                            <input type="text" class="form-control" disabled name="form5PerfilPacienteCual" placeholder="Vacio" value="">
+                        }
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label for="last_name"><h5>Frecuencia</h5></label>
+                        <input type="text" class="form-control" disabled name="form5PerfilPacienteFrecuencia" placeholder="Vacio" value="@Model.Deporte[0].D_Frecuencia">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label for="last_name"><h5>Ha dejado de realizar deportes por el pectus?</h5></label>
+                        <input type="text" class="form-control" disabled name="form5PerfilPacienteDejoDeporte" placeholder="Vacio" value="@Model.Deporte[0].D_DejoDeporte">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label for="last_name"><h5>Por qué?</h5></label>
+                        <input type="text" class="form-control" disabled name="form5PerfilPacientePorque" placeholder="Vacio" value="@Model.Deporte[0].D_Porque">
+                    </div>
+                </div>
+            </div>
+            <div id="buttonsSubmitForm5SistemaCompresorEditar" hidden="hidden" class="form-group">
+                <div class="col-xs-12">
+                    <br>
+                    <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Guardar</button>
+                    <button id="buttonForm5SistemaCompresorEditarHidden" class="btn btn-lg btn-danger" type="button"><span class="fa fa-window-close"></span></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
